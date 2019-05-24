@@ -1,0 +1,37 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion sdk_compile_version
+
+    defaultConfig {
+        minSdkVersion sdk_min_version
+        targetSdkVersion sdk_target_version
+        versionCode app_version_code
+        versionName "$app_version_name"
+    }
+}
+
+dependencies {
+    implementation "com.arello-mobile:moxy:$lib_moxy_version"
+    implementation "com.arello-mobile:moxy-app-compat:$lib_moxy_version"
+
+    implementation "androidx.core:core-ktx:$lib_androidx_ktx"
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation "androidx.recyclerview:recyclerview:$lib_androidx_recycler"
+    implementation "com.google.android.material:material:$lib_material_version"
+
+    implementation "ru.terrakok.cicerone:cicerone:$lib_cicerone_version"
+
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    api "org.jetbrains.kotlin:kotlin-android-extensions-runtime:$kotlin_version"
+    api "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$lib_coroutines_version"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$lib_coroutines_version"
+
+    api "com.google.code.gson:gson:$lib_gson_version"
+
+    implementation "org.koin:koin-android:$lib_koin_version"
+    implementation "com.github.bumptech.glide:glide:$lib_glide_version"
+}

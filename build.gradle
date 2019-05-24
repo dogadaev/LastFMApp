@@ -1,0 +1,56 @@
+buildscript {
+    ext {
+        kotlin_version = '1.3.31'
+        gradle_version = '3.4.1'
+        appcompat_version = '1.1.0-alpha05'
+
+        sdk_min_version = 19
+        sdk_compile_version = 28
+        sdk_target_version = 28
+
+        app_version_code = 1
+        app_version_name = "0.1"
+        app_multidex_version = "1.0.3"
+
+        lib_koin_version = '2.0.0-rc-2'
+        lib_moxy_version = '1.5.6'
+        lib_cicerone_version = '5.0.0'
+
+        lib_androidx_constraint_layout_version = '1.1.3'
+        lib_androidx_recycler = '1.1.0-alpha05'
+        lib_androidx_ktx = '1.0.2'
+
+        lib_retrofit2_version = '2.6.0-SNAPSHOT'
+        lib_okhttp3_version = '3.12.1'
+
+        lib_coroutines_version = '1.2.1'
+        lib_gson_version = "2.8.5"
+        lib_room_version = "2.1.0-beta01"
+        lib_glide_version = '4.9.0'
+        lib_material_version = '1.1.0-alpha06'
+    }
+
+    repositories {
+        google()
+        jcenter()
+
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:$gradle_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven {
+            url "https://oss.sonatype.org/content/repositories/snapshots"
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

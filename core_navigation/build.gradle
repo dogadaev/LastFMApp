@@ -1,0 +1,23 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion sdk_compile_version
+
+    defaultConfig {
+        minSdkVersion sdk_min_version
+        targetSdkVersion sdk_target_version
+        versionCode app_version_code
+        versionName "$app_version_name"
+    }
+}
+
+dependencies {
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+
+    implementation "org.koin:koin-android:$lib_koin_version"
+    api "ru.terrakok.cicerone:cicerone:$lib_cicerone_version"
+
+    implementation project(':core_static')
+}

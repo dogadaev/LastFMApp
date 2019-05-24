@@ -1,0 +1,43 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion sdk_compile_version
+
+    defaultConfig {
+        applicationId "org.dogadaev.lastfmapp"
+        minSdkVersion sdk_min_version
+        targetSdkVersion sdk_target_version
+        versionCode app_version_code
+        versionName "$app_version_name"
+
+        multiDexEnabled = true
+
+        android.defaultConfig.vectorDrawables.useSupportLibrary = true
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+
+    kapt "com.arello-mobile:moxy-compiler:$lib_moxy_version"
+    implementation "com.arello-mobile:moxy:$lib_moxy_version"
+
+    implementation "org.koin:koin-android:$lib_koin_version"
+    implementation "com.android.support:multidex:$app_multidex_version"
+
+    implementation project(':core_net')
+    implementation project(':core_navigation')
+    implementation project(':core_static')
+}
