@@ -33,34 +33,35 @@ class SearchFragment : BaseFragment(), Search.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupButtons()
+        setupListeners()
         setupRecycler()
     }
 
     override fun onState(state: Search.State) {
         when (state) {
             is Search.State.OnDisplay -> {
-                progressBar.isVisible = false
-                searchButton.isInvisible = false
+                setLoadingEnabled(false)
 
                 val viewModel = state.viewModel
 
-                adapter.submitList(viewModel.artists)
+                searchField.setText(viewModel.searchQuery)
+                adapter.submitList(viewModel.artists) {
+                    if (viewModel.newSearch) {
+                        recycler.scrollToPosition(0)
+                    } else {
+                        adapter.notifyItemRangeInserted(adapter.currentList.size, viewModel.addedCount)
+                    }
+                }
             }
-            is Search.State.OnLoading -> {
-                progressBar.isVisible = true
-                searchButton.isInvisible = true
-            }
+            is Search.State.OnLoading -> setLoadingEnabled(true)
             is Search.State.OnError -> {
-                progressBar.isVisible = false
-                searchButton.isInvisible = false
-
+                setLoadingEnabled(false)
                 showInfoMessage(requireContext(), state.message)
             }
         }
     }
 
-    private fun setupButtons() {
+    private fun setupListeners() {
         searchButton.setOnClickListener {
             presenter.performNewSearch(
                 searchField.text.toString()
@@ -70,9 +71,16 @@ class SearchFragment : BaseFragment(), Search.View {
 
     private fun setupRecycler() {
         adapter = SearchAdapter()
-        recycler.isNestedScrollingEnabled = false
         recycler.layoutManager = LinearLayoutManager(context)
         recycler.adapter = adapter
+    }
+
+
+    private fun setLoadingEnabled(enabled: Boolean) {
+        progressBar.isVisible = enabled
+        searchButton.isInvisible = enabled
+
+        adapter.onBottomReached(if (enabled) null else presenter::loadNextPage)
     }
 
     @Parcelize
