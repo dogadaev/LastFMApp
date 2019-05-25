@@ -16,6 +16,7 @@ import org.koin.core.get
 class SearchAdapter : ListAdapter<Artist, SearchAdapter.ViewHolder>(SearchDiffCallback), KoinComponent {
 
     private val imageLoader: ImageLoader = get()
+    private var onBottomReachListener: (() -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -24,7 +25,12 @@ class SearchAdapter : ListAdapter<Artist, SearchAdapter.ViewHolder>(SearchDiffCa
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        if (position == itemCount - 5) onBottomReachListener?.invoke()
         holder.bind(position)
+    }
+
+    fun onBottomReached(listener: (() -> Unit)?) {
+        onBottomReachListener = listener
     }
 
     inner class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {

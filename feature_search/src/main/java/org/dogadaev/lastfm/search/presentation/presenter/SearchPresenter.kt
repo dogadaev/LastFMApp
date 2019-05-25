@@ -4,10 +4,10 @@ import com.arellomobile.mvp.InjectViewState
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import org.dogadaev.lastfm.net.data.model.Artist
 import org.dogadaev.lastfm.search.data.model.SearchViewModel
 import org.dogadaev.lastfm.search.data.repository.SearchRepository
 import org.dogadaev.lastfm.search.presentation.contract.Search
-import java.lang.Exception
 
 @InjectViewState
 class SearchPresenter(
@@ -16,18 +16,38 @@ class SearchPresenter(
 
     private var searchJob: Job? = null
 
+    private var artists: MutableList<Artist> = mutableListOf()
+    private var searchQuery: String = ""
+    private var currentPage: Int = 1
+    private var maxPages: Int = 0
+
     override fun performNewSearch(searchQuery: String) {
+        this.searchQuery = searchQuery
+        currentPage = 1
+        artists = mutableListOf()
+        loadArtists(true)
+    }
+
+    override fun loadNextPage() {
+        if (currentPage < maxPages) {
+            currentPage++
+            loadArtists(false)
+        }
+    }
+
+    private fun loadArtists(newSearch: Boolean) {
         viewState.onState(Search.State.OnLoading)
 
         searchJob?.cancel()
         searchJob = launch {
             try {
-                val searchModel = searchRepository.searchForArtist(searchQuery)
-                val searchViewModel = SearchViewModel(
-                    searchQuery,
-                    searchModel.results.artistmatches.artists
-                )
-                viewState.onState(Search.State.OnDisplay(searchViewModel))
+                val searchModel = searchRepository.searchForArtist(searchQuery, page = currentPage)
+                val searchResult = searchModel.results
+
+                this@SearchPresenter.maxPages = searchResult.totalResults / searchResult.itemsPerPage
+                this@SearchPresenter.currentPage = searchResult.query.startPage
+
+                updateArtists(searchResult.artistmatches.artists, newSearch)
             } catch (e: CancellationException) {
                 // no op
             } catch (e: Exception) {
@@ -36,7 +56,31 @@ class SearchPresenter(
         }
     }
 
-    override fun loadNextPage() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    private fun updateArtists(newArtists: List<Artist>, newSearch: Boolean) {
+        val searchViewModel = if (newSearch) {
+            artists = newArtists.toMutableList()
+
+            SearchViewModel(
+                searchQuery,
+                artists,
+                newSearch
+            )
+        } else {
+            artists.addAll(newArtists)
+
+            SearchViewModel(
+                searchQuery,
+                artists,
+                newSearch,
+                addedCount = newArtists.size
+            )
+        }
+
+        viewState.onState(Search.State.OnDisplay(searchViewModel))
+
+    }
+
+    companion object {
+
     }
 }
