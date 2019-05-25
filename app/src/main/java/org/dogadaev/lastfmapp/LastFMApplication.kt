@@ -5,12 +5,16 @@ import androidx.multidex.MultiDexApplication
 import com.arellomobile.mvp.RegisterMoxyReflectorPackages
 import org.dogadaev.navigation.navigationModule
 import org.dogadaev.net.networkModule
+import org.dogadaev.lastfm.search.searchModule
 import org.dogadaev.statical.gson.gsonModule
 import org.dogadaev.statical.resources.resourceProviderModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
-@RegisterMoxyReflectorPackages()
+@Suppress("unused")
+@RegisterMoxyReflectorPackages(
+    "org.dogadaev.lastfm.search"
+)
 class LastFMApplication : MultiDexApplication() {
 
     override fun onCreate() {
@@ -27,7 +31,8 @@ class LastFMApplication : MultiDexApplication() {
                     navigationModule,
                     networkModule,
                     resourceProviderModule,
-                    gsonModule
+                    gsonModule,
+                    searchModule
                 )
             )
         }
