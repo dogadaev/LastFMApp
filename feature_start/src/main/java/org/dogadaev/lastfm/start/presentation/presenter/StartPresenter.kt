@@ -1,0 +1,17 @@
+package org.dogadaev.lastfm.start.presentation.presenter
+
+import android.content.Intent
+import com.arellomobile.mvp.InjectViewState
+import org.dogadaev.lastfm.start.presentation.contract.Start
+import org.koin.core.KoinComponent
+import ru.terrakok.cicerone.Router
+
+@InjectViewState
+class StartPresenter(
+    private val router: Router
+) : Start.Presenter(), KoinComponent {
+
+    override fun handleIntent(intent: Intent?) {
+        // todo: Decide what screen to open
+    }
+}
