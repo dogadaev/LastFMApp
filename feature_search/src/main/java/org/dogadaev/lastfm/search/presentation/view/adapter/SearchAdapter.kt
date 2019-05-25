@@ -7,13 +7,14 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_artist.*
-import org.dogadaev.lastfm.net.data.model.Artist
+import org.dogadaev.lastfm.net.data.model.getImageUrl
+import org.dogadaev.lastfm.net.data.model.search.SearchArtist
 import org.dogadaev.lastfm.search.R
 import org.dogadaev.lastfm.statical.media.ImageLoader
 import org.koin.core.KoinComponent
 import org.koin.core.get
 
-class SearchAdapter : ListAdapter<Artist, SearchAdapter.ViewHolder>(SearchDiffCallback), KoinComponent {
+class SearchAdapter : ListAdapter<SearchArtist, SearchAdapter.ViewHolder>(SearchDiffCallback), KoinComponent {
 
     private val imageLoader: ImageLoader = get()
     private var onBottomReachListener: (() -> Unit)? = null
@@ -43,7 +44,7 @@ class SearchAdapter : ListAdapter<Artist, SearchAdapter.ViewHolder>(SearchDiffCa
             listeners.text = context.getString(R.string.listeners_count, artist.listeners)
             imageLoader.load {
                 target(artistCover)
-                src(artist.getImageUrl())
+                src(artist.images.getImageUrl())
                 noCaching()
                 fallback(R.drawable.ic_no_image)
                 error(R.drawable.ic_no_image)

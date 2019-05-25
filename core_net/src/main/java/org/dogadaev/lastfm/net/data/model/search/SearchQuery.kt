@@ -1,4 +1,4 @@
-package org.dogadaev.lastfm.net.data.model
+package org.dogadaev.lastfm.net.data.model.search
 
 import com.google.gson.annotations.SerializedName
 

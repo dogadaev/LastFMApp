@@ -4,7 +4,7 @@ import com.arellomobile.mvp.InjectViewState
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import org.dogadaev.lastfm.net.data.model.Artist
+import org.dogadaev.lastfm.net.data.model.search.SearchArtist
 import org.dogadaev.lastfm.search.data.model.SearchViewModel
 import org.dogadaev.lastfm.search.data.repository.SearchRepository
 import org.dogadaev.lastfm.search.presentation.contract.Search
@@ -16,7 +16,7 @@ class SearchPresenter(
 
     private var searchJob: Job? = null
 
-    private var artists: MutableList<Artist> = mutableListOf()
+    private var artists: MutableList<SearchArtist> = mutableListOf()
     private var searchQuery: String = ""
     private var currentPage: Int = 1
     private var maxPages: Int = 0
@@ -56,7 +56,7 @@ class SearchPresenter(
         }
     }
 
-    private fun updateArtists(newArtists: List<Artist>, newSearch: Boolean) {
+    private fun updateArtists(newArtists: List<SearchArtist>, newSearch: Boolean) {
         val searchViewModel = if (newSearch) {
             artists = newArtists.toMutableList()
 
