@@ -29,6 +29,12 @@ android {
 }
 
 dependencies {
+    implementation project(':feature_search')
+    implementation project(':core_net')
+    implementation project(':core_navigation')
+    implementation project(':core_static')
+    implementation project(':feature_start')
+
     implementation "androidx.appcompat:appcompat:$appcompat_version"
 
     kapt "com.arello-mobile:moxy-compiler:$lib_moxy_version"
@@ -36,9 +42,4 @@ dependencies {
 
     implementation "org.koin:koin-android:$lib_koin_version"
     implementation "com.android.support:multidex:$app_multidex_version"
-
-    implementation project(':core_net')
-    implementation project(':core_navigation')
-    implementation project(':core_static')
-    implementation project(':feature_start')
 }

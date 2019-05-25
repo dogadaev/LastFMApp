@@ -14,12 +14,12 @@ android {
 }
 
 dependencies {
+    implementation project(':core_static')
+
     api "com.squareup.okhttp3:okhttp:$lib_okhttp3_version"
 
     api "com.squareup.retrofit2:retrofit:$lib_retrofit2_version"
     implementation "com.squareup.retrofit2:converter-gson:$lib_retrofit2_version"
 
     implementation "org.koin:koin-android:$lib_koin_version"
-
-    implementation project(':core_static')
 }

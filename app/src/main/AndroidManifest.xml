@@ -2,6 +2,8 @@
           xmlns:tools="http://schemas.android.com/tools"
           package="org.dogadaev.lastfm">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
             android:name="org.dogadaev.lastfm.LastFMApplication"
             android:allowBackup="true"
