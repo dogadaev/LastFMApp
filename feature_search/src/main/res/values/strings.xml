@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">feature_search</string>
+
+    <string name="search_field_hint">Enter an artist name</string>
+    <string name="listeners_count">listeners: %1$d</string>
+
+    <string name="cd_artist_cover">An artist\'s cover</string>
 </resources>

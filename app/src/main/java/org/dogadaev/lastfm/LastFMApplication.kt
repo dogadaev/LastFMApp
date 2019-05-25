@@ -8,6 +8,7 @@ import org.dogadaev.lastfm.navigation.navigationModule
 import org.dogadaev.lastfm.net.networkModule
 import org.dogadaev.lastfm.start.startModule
 import org.dogadaev.lastfm.statical.gson.gsonModule
+import org.dogadaev.lastfm.statical.media.mediaModule
 import org.dogadaev.lastfm.statical.resources.resourceProviderModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -34,6 +35,7 @@ class LastFMApplication : MultiDexApplication() {
                     networkModule,
                     resourceProviderModule,
                     gsonModule,
+                    mediaModule,
                     searchModule,
                     startModule
                 )
