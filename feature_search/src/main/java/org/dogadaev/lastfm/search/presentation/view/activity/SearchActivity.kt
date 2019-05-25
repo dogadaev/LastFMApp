@@ -1,7 +1,7 @@
 package org.dogadaev.lastfm.search.presentation.view.activity
 
 import android.os.Bundle
-import org.dogadaev.statical.base.BaseActivity
+import org.dogadaev.lastfm.statical.base.BaseActivity
 
 class SearchActivity : BaseActivity() {
 
