@@ -27,13 +27,14 @@ class AlbumsActivity : BaseActivity() {
 
         if (savedInstanceState == null) {
             router.newRootScreen(get<AlbumsScreen> {
-                parametersOf(getScreen<Screen>().artist)
+                val screen = getScreen<Screen>()
+                parametersOf(screen.artist, screen.mbid)
             })
         }
     }
 
     @Parcelize
-    class Screen(val artist: String) : BaseAlbumsScreen() {
+    class Screen(val artist: String, val mbid: String?) : BaseAlbumsScreen() {
         override fun getActivityIntent(context: Context): Intent =
             newIntentWithScreen<AlbumsActivity, Screen>(context)
     }

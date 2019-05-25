@@ -1,58 +1,39 @@
 package org.dogadaev.lastfm.search.presentation.view.adapter
 
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_artist.*
 import org.dogadaev.lastfm.net.data.model.getImageUrl
 import org.dogadaev.lastfm.net.data.model.search.SearchArtist
 import org.dogadaev.lastfm.search.R
 import org.dogadaev.lastfm.statical.media.ImageLoader
-import org.koin.core.KoinComponent
+import org.dogadaev.lastfm.statical.widget.SimpleListAdapter
 import org.koin.core.get
 
-class SearchAdapter : ListAdapter<SearchArtist, SearchAdapter.ViewHolder>(SearchDiffCallback), KoinComponent {
+class SearchAdapter : SimpleListAdapter<SearchArtist>(SearchDiffCallback) {
+    override val layoutRes: Int
+        get() = R.layout.item_artist
+
+    override val bottomReachLimit: Int
+        get() = 5
 
     private val imageLoader: ImageLoader = get()
-    private var onBottomReachListener: (() -> Unit)? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.item_artist, parent, false)
-        return ViewHolder(view)
-    }
+    override fun bind(position: Int, holder: ViewHolder) {
+        val context = holder.root.context
+        val artist = getItem(position)
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        if (position == itemCount - 5) onBottomReachListener?.invoke()
-        holder.bind(position)
-    }
+        holder.name.text = artist.name
+        holder.listeners.text = context.getString(R.string.listeners_count, artist.listeners)
 
-    fun onBottomReached(listener: (() -> Unit)?) {
-        onBottomReachListener = listener
-    }
+        imageLoader.load {
+            target(holder.artistCover)
+            src(artist.images.getImageUrl())
+            noCaching()
+            fallback(R.drawable.ic_no_image)
+            error(R.drawable.ic_no_image)
+        }
 
-    inner class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
-
-        fun bind(position: Int) {
-            val context = root.context
-            val artist = getItem(position)
-
-            name.text = artist.name
-            listeners.text = context.getString(R.string.listeners_count, artist.listeners)
-            imageLoader.load {
-                target(artistCover)
-                src(artist.images.getImageUrl())
-                noCaching()
-                fallback(R.drawable.ic_no_image)
-                error(R.drawable.ic_no_image)
-            }
-
-            root.setOnClickListener {
-
-            }
+        holder.root.setOnClickListener {
+            // todo: implement AlbumsScreen open
         }
     }
 }

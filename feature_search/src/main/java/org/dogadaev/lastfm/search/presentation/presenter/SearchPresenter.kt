@@ -29,10 +29,9 @@ class SearchPresenter(
     }
 
     override fun loadNextPage() {
-        if (currentPage < maxPages) {
-            currentPage++
-            loadArtists(false)
-        }
+        if (currentPage >= maxPages) return
+        currentPage++
+        loadArtists(false)
     }
 
     private fun loadArtists(newSearch: Boolean) {
@@ -77,10 +76,6 @@ class SearchPresenter(
         }
 
         viewState.onState(Search.State.OnDisplay(searchViewModel))
-
-    }
-
-    companion object {
 
     }
 }

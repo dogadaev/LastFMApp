@@ -40,7 +40,7 @@ interface API {
     suspend fun getTopAlbumsAsync(
         @Query("api_key") apiKey: String,
         @Query("artist") artist: String?,
-        @Query("mbid") mbid: String,
+        @Query("mbid") mbid: String?,
         @Query("page") page: Int?,
         @Query("limit ") limit: Int?
     ): TopAlbumsResult
