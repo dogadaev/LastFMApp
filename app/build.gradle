@@ -33,6 +33,7 @@ dependencies {
     implementation project(':core_net')
     implementation project(':core_navigation')
     implementation project(':core_static')
+    implementation project(':feature_start')
 
     implementation "androidx.appcompat:appcompat:$appcompat_version"
 
