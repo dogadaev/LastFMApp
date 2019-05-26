@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.multidex.MultiDexApplication
 import com.arellomobile.mvp.RegisterMoxyReflectorPackages
 import org.dogadaev.lastfm.albums.albumsModule
+import org.dogadaev.lastfm.db.databaseModule
 import org.dogadaev.lastfm.search.searchModule
 import org.dogadaev.lastfm.navigation.navigationModule
 import org.dogadaev.lastfm.net.networkModule
@@ -35,6 +36,7 @@ class LastFMApplication : MultiDexApplication() {
                 listOf(
                     navigationModule,
                     networkModule,
+                    databaseModule,
                     resourceProviderModule,
                     gsonModule,
                     mediaModule,

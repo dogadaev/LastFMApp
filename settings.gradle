@@ -1,1 +1,1 @@
-include ':app', ':core_static', ':core_navigation', ':core_net', ':feature_search', ':feature_start', ':feature_albums'
+include ':app', ':core_static', ':core_navigation', ':core_net', ':feature_search', ':feature_start', ':feature_albums', ':core_db'
