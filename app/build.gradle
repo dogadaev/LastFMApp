@@ -29,11 +29,12 @@ android {
 }
 
 dependencies {
-    implementation project(':feature_search')
     implementation project(':core_net')
     implementation project(':core_navigation')
     implementation project(':core_static')
     implementation project(':feature_start')
+    implementation project(':feature_search')
+    implementation project(':feature_albums')
 
     implementation "androidx.appcompat:appcompat:$appcompat_version"
 

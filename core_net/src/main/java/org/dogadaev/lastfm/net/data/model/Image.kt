@@ -19,3 +19,6 @@ data class Image(
         Mega
     }
 }
+
+fun List<Image>.getImageUrl(size: Image.Size = Image.Size.Medium): String =
+    firstOrNull { it.size == size }?.url ?: ""

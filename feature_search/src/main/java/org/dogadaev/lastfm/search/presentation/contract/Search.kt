@@ -5,6 +5,7 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 import org.dogadaev.lastfm.search.data.model.SearchViewModel
 import org.dogadaev.lastfm.statical.mvp.BasePresenter
 import org.dogadaev.lastfm.statical.mvp.BaseView
+import java.text.FieldPosition
 
 interface Search {
     interface View : BaseView {
@@ -14,7 +15,8 @@ interface Search {
 
     abstract class Presenter : BasePresenter<View>() {
         abstract fun performNewSearch(searchQuery: String)
-        abstract fun loadNextPage()
+        abstract fun loadMoreArtists()
+        abstract fun openTopAlbums(position: Int)
     }
 
     sealed class State {
