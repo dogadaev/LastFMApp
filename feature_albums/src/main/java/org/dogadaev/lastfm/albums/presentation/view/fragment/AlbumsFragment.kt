@@ -51,6 +51,7 @@ class AlbumsFragment : BaseFragment(), Albums.View {
                     if (viewModel.addedCount > 0) {
                         adapter.notifyItemRangeInserted(adapter.currentList.size, viewModel.addedCount)
                     }
+                    placeholder.isVisible = adapter.currentList.isEmpty()
                 }
                 adapter.onBottomReached(presenter::loadMoreAlbums)
                 setLoadingEnabled(false)
@@ -66,6 +67,7 @@ class AlbumsFragment : BaseFragment(), Albums.View {
     private fun setupRecycler() {
         adapter = AlbumsAdapter()
 
+        adapter.onSaveDeleteClicked(presenter::saveDeleteAlbum)
         adapter.onAlbumClicked(presenter::openAlbumInfo)
         recycler.layoutManager = LinearLayoutManager(context)
         recycler.adapter = adapter

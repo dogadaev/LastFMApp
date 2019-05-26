@@ -4,11 +4,12 @@ import com.arellomobile.mvp.InjectViewState
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import org.dogadaev.lastfm.albums.data.model.AlbumCommon
 import org.dogadaev.lastfm.albums.data.model.AlbumsViewModel
 import org.dogadaev.lastfm.albums.data.repository.AlbumsRepository
 import org.dogadaev.lastfm.albums.presentation.contract.Albums
 import org.dogadaev.lastfm.navigation.BaseDetailsScreen
-import org.dogadaev.lastfm.net.data.model.albums.Album
+import org.dogadaev.lastfm.net.data.model.getImageUrl
 import org.koin.core.get
 import org.koin.core.parameter.parametersOf
 import ru.terrakok.cicerone.Router
@@ -24,7 +25,7 @@ class AlbumsPresenter(
     private lateinit var artist: String
     private var mbid: String? = null
 
-    private var albums: MutableList<Album> = mutableListOf()
+    private var albums: MutableList<AlbumCommon> = mutableListOf()
     private var currentPage: Int = 1
     private var totalPages: Int = 0
 
@@ -46,13 +47,41 @@ class AlbumsPresenter(
         router.navigateTo(detailsScreen)
     }
 
+    override fun saveDeleteAlbum(position: Int) {
+        job?.cancel()
+        job = launch {
+            try {
+                val album = albums[position]
+                val savedAlbum = if (album.isStored) {
+                    albumsRepository.deleteAlbum(album.artist.name, album.name)
+                    album.copy(isStored = false, isBeingProcessed = false)
+                } else {
+                    albumsRepository.saveAlbum(album)
+                    album.copy(isStored = true, isBeingProcessed = false)
+                }
+
+                albums = albums.map { if (it.name == savedAlbum.name) savedAlbum else it }.toMutableList()
+
+                val viewModel = AlbumsViewModel(artist, albums)
+                viewState.onState(Albums.State.OnDisplay(viewModel))
+            } catch (e: CancellationException) {
+                // no op
+            } catch (e: Exception) {
+                viewState.onState(Albums.State.OnError(e.localizedMessage))
+                // todo: остановить прогрессбар
+            }
+        }
+    }
+
     private fun getArtistInfo(artist: String, mbid: String?) {
         job?.cancel()
         job = launch {
             try {
                 val topAlbumsResult = albumsRepository.getTopAlbums(artist, mbid, page = currentPage)
                 val attributes = topAlbumsResult.topAlbums.attributes
-                val albums = topAlbumsResult.topAlbums.albums
+                val albums = topAlbumsResult.topAlbums.albums.map {
+                    AlbumCommon(it.name, it.playCount, it.url, it.artist, it.images.getImageUrl())
+                }
 
                 this@AlbumsPresenter.currentPage = attributes.page
                 this@AlbumsPresenter.totalPages = attributes.totalPages
@@ -66,7 +95,7 @@ class AlbumsPresenter(
         }
     }
 
-    private fun updateAlbums(newAlbums: List<Album>) {
+    private fun updateAlbums(newAlbums: List<AlbumCommon>) {
         val addedCount = if (currentPage > 1) {
             albums.addAll(newAlbums)
             newAlbums.size

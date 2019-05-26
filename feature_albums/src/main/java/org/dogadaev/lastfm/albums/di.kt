@@ -17,5 +17,5 @@ val albumsModule = module {
     factory<BaseAlbumsScreen> { (artist: String, mbid: String?) -> AlbumsActivity.Screen(artist, mbid) }
     factory<AlbumsScreen> { (artist: String, mbid: String?) -> AlbumsFragment.Screen(artist, mbid) }
 
-    single<AlbumsRepository> { AlbumsRepositoryImpl(get(), get(API_KEY)) }
+    single<AlbumsRepository> { AlbumsRepositoryImpl(get(), get(API_KEY), get()) }
 }
