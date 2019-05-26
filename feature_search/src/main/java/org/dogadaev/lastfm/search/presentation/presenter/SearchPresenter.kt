@@ -28,8 +28,6 @@ class SearchPresenter(
 
     override fun performNewSearch(searchQuery: String) {
         this.searchQuery = searchQuery
-        currentPage = 1
-        artists = mutableListOf()
         loadArtists(true)
     }
 
@@ -56,11 +54,16 @@ class SearchPresenter(
         searchJob?.cancel()
         searchJob = launch {
             try {
-                val searchModel = searchRepository.searchForArtist(searchQuery, page = currentPage)
+                val page = if (newSearch) 1 else currentPage
+                val searchModel = searchRepository.searchForArtist(searchQuery, page = page)
                 val searchResult = searchModel.results
 
                 this@SearchPresenter.maxPages = searchResult.totalResults / searchResult.itemsPerPage
                 this@SearchPresenter.currentPage = searchResult.query.startPage
+
+                if (newSearch) {
+                    artists = mutableListOf()
+                }
 
                 updateArtists(searchResult.artistmatches.artists, newSearch)
             } catch (e: CancellationException) {

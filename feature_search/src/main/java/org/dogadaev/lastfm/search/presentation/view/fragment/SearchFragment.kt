@@ -69,23 +69,25 @@ class SearchFragment : BaseFragment(), Search.View {
     private fun setupListeners() {
         searchButton.setOnClickListener {
             hideKeyboard()
-
-            presenter.performNewSearch(
-                searchField.text.toString()
-            )
+            performNewSearch()
         }
 
         searchField.setOnEditorActionListener { _, actionId, _ ->
             hideKeyboard()
 
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                presenter.performNewSearch(
-                    searchField.text.toString()
-                )
+                performNewSearch()
                 return@setOnEditorActionListener true
             }
             return@setOnEditorActionListener false
         }
+    }
+
+    private fun performNewSearch() {
+        recycler.scrollToPosition(0)
+        presenter.performNewSearch(
+            searchField.text.toString()
+        )
     }
 
     private fun setupRecycler() {
