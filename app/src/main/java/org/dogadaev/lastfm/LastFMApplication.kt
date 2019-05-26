@@ -1,9 +1,12 @@
 package org.dogadaev.lastfm
 
+import android.webkit.WebView
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.multidex.MultiDexApplication
 import com.arellomobile.mvp.RegisterMoxyReflectorPackages
+import com.facebook.stetho.Stetho
 import org.dogadaev.lastfm.albums.albumsModule
+import org.dogadaev.lastfm.details.detailsModule
 import org.dogadaev.lastfm.search.searchModule
 import org.dogadaev.lastfm.navigation.navigationModule
 import org.dogadaev.lastfm.net.networkModule
@@ -18,13 +21,15 @@ import org.koin.core.context.startKoin
 @RegisterMoxyReflectorPackages(
     "org.dogadaev.lastfm.start",
     "org.dogadaev.lastfm.search",
-    "org.dogadaev.lastfm.albums"
+    "org.dogadaev.lastfm.albums",
+    "org.dogadaev.lastfm.details"
 )
 class LastFMApplication : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
         setupFrameworkConfigs()
+        setupStetho()
         setupKoin()
     }
 
@@ -40,9 +45,16 @@ class LastFMApplication : MultiDexApplication() {
                     mediaModule,
                     startModule,
                     searchModule,
-                    albumsModule
+                    albumsModule,
+                    detailsModule
                 )
             )
+        }
+    }
+
+    private fun setupStetho() {
+        if (BuildConfig.DEBUG) {
+            Stetho.initializeWithDefaults(this)
         }
     }
 

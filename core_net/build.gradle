@@ -21,5 +21,8 @@ dependencies {
     api "com.squareup.retrofit2:retrofit:$lib_retrofit2_version"
     implementation "com.squareup.retrofit2:converter-gson:$lib_retrofit2_version"
 
+    implementation "com.facebook.stetho:stetho:$lib_stetho_version"
+    implementation "com.facebook.stetho:stetho-okhttp3:$lib_stetho_version"
+
     implementation "org.koin:koin-android:$lib_koin_version"
 }
