@@ -1,4 +1,4 @@
-package org.dogadaev.lastfm.albums.presentation.view.activity
+package org.dogadaev.lastfm.albums.presentation.view.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import org.dogadaev.lastfm.net.data.model.albums.Album

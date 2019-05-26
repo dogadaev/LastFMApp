@@ -8,7 +8,7 @@ import org.dogadaev.lastfm.statical.media.ImageLoader
 import org.dogadaev.lastfm.statical.widget.SimpleListAdapter
 import org.koin.core.get
 
-private typealias OnArtistClickListener = (artist: String, mbid: String?) -> Unit
+private typealias OnArtistClickListener = (position: Int) -> Unit
 
 class SearchAdapter : SimpleListAdapter<SearchArtist>(SearchDiffCallback) {
     override val layoutRes: Int
@@ -41,7 +41,7 @@ class SearchAdapter : SimpleListAdapter<SearchArtist>(SearchDiffCallback) {
         }
 
         holder.root.setOnClickListener {
-            onArtistClickListener?.invoke(artist.name, artist.mbid)
+            onArtistClickListener?.invoke(position)
         }
     }
 }

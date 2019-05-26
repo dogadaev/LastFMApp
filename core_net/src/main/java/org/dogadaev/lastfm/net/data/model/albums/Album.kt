@@ -8,5 +8,5 @@ data class Album(
     @SerializedName("playcount") val playCount: Int = 0,
     val url: String = "",
     val artist: AlbumsArtist = AlbumsArtist(),
-    val images: List<Image> = emptyList()
+    @SerializedName("image") val images: List<Image> = emptyList()
 )

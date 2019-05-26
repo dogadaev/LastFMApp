@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.WindowManager
 import kotlinx.android.parcel.Parcelize
+import kotlinx.android.synthetic.main.activity_search.*
 import kotlinx.android.synthetic.main.activity_search.view.*
 import org.dogadaev.lastfm.navigation.BaseSearchScreen
 import org.dogadaev.lastfm.navigation.SearchScreen
@@ -25,8 +26,13 @@ class SearchActivity : BaseActivity() {
         setContentView(R.layout.activity_search)
 
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+        setupToolbar()
 
         if (savedInstanceState == null) router.newRootScreen(get<SearchScreen>())
+    }
+
+    private fun setupToolbar() {
+        setSupportActionBar(toolbar)
     }
 
     @Parcelize

@@ -3,8 +3,9 @@
           package="org.dogadaev.lastfm.search">
 
     <application>
-        <activity android:name=".presentation.view.activity.SearchActivity">
-        </activity>
+        <activity android:name=".presentation.view.activity.SearchActivity"
+            android:theme="@style/AppTheme.Search"
+            android:label="@string/search_activity_label"/>
     </application>
 
 </manifest>

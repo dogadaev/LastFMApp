@@ -36,6 +36,9 @@ class AlbumsPresenter(
         getArtistInfo(artist, mbid)
     }
 
+    override fun openAlbumInfo(position: Int) {
+    }
+
     private fun getArtistInfo(artist: String, mbid: String?) {
         job?.cancel()
         job = launch {
@@ -57,13 +60,15 @@ class AlbumsPresenter(
     }
 
     private fun updateAlbums(newAlbums: List<Album>) {
-        if (currentPage > 1) {
+        val addedCount = if (currentPage > 1) {
             albums.addAll(newAlbums)
+            newAlbums.size
         } else {
             albums = newAlbums.toMutableList()
+            0
         }
 
-        val viewModel = AlbumsViewModel(albums)
+        val viewModel = AlbumsViewModel(artist, albums, addedCount = addedCount)
         viewState.onState(Albums.State.OnDisplay(viewModel))
     }
 }

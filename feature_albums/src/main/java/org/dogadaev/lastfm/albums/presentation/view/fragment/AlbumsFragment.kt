@@ -2,6 +2,7 @@ package org.dogadaev.lastfm.albums.presentation.view.fragment
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
@@ -45,14 +46,18 @@ class AlbumsFragment : BaseFragment(), Albums.View {
             is Albums.State.OnDisplay -> {
                 val viewModel = state.viewModel
 
-                adapter.submitList(viewModel.albums)
-                // todo: Stop loading animation
+                artistName.text = viewModel.artist
+                adapter.submitList(viewModel.albums) {
+                    if (viewModel.addedCount > 0) {
+                        adapter.notifyItemRangeInserted(adapter.currentList.size, viewModel.addedCount)
+                    }
+                }
+                adapter.onBottomReached(presenter::loadMoreAlbums)
+                setLoadingEnabled(false)
             }
-            is Albums.State.OnLoading -> {
-                // todo: Start loading animation
-            }
+            is Albums.State.OnLoading -> setLoadingEnabled(true)
             is Albums.State.OnError -> {
-                // todo: Stop loading animation
+                setLoadingEnabled(false)
                 showInfoMessage(requireContext(), state.message)
             }
         }
@@ -61,8 +66,15 @@ class AlbumsFragment : BaseFragment(), Albums.View {
     private fun setupRecycler() {
         adapter = AlbumsAdapter()
 
+        adapter.onAlbumClicked(presenter::openAlbumInfo)
         recycler.layoutManager = LinearLayoutManager(context)
         recycler.adapter = adapter
+    }
+
+    private fun setLoadingEnabled(enabled: Boolean) {
+        progressBar.isVisible = enabled
+
+        adapter.onBottomReached(if (enabled) null else presenter::loadMoreAlbums)
     }
 
     @Parcelize

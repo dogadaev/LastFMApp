@@ -15,6 +15,7 @@ interface Albums {
     abstract class Presenter : BasePresenter<View>() {
         abstract fun init(artist: String, mbid: String?)
         abstract fun loadMoreAlbums()
+        abstract fun openAlbumInfo(position: Int)
     }
 
     sealed class State {

@@ -4,7 +4,11 @@
     >
 
     <application>
-        <activity android:name=".presentation.view.activity.AlbumsActivity"></activity>
+        <activity
+            android:name=".presentation.view.activity.AlbumsActivity"
+            android:label="@string/albums_activity_label"
+            android:theme="@style/AppTheme.Albums"
+            />
     </application>
 
 </manifest>

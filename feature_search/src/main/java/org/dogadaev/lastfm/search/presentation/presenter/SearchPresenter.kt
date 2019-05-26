@@ -33,13 +33,17 @@ class SearchPresenter(
         loadArtists(true)
     }
 
-    override fun loadNextPage() {
+    override fun loadMoreArtists() {
         if (currentPage >= maxPages) return
         currentPage++
         loadArtists(false)
     }
 
-    override fun openTopAlbums(artist: String, mbid: String?) {
+    override fun openTopAlbums(position: Int) {
+        val artist = artists[position].name
+        val mbidRaw = artists[position].mbid
+        val mbid = if (mbidRaw.isNotEmpty()) mbidRaw else null
+
         val albumsScreen = get<BaseAlbumsScreen> {
             parametersOf(artist, mbid)
         }
