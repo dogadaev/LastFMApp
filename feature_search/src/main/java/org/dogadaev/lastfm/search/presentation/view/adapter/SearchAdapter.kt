@@ -38,6 +38,7 @@ class SearchAdapter : SimpleListAdapter<SearchArtist>(SearchDiffCallback) {
             noCaching()
             fallback(R.drawable.ic_no_image)
             error(R.drawable.ic_no_image)
+            placeholder(R.drawable.ic_no_image)
         }
 
         holder.root.setOnClickListener {

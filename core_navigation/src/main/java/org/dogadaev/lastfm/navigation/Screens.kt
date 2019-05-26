@@ -9,11 +9,9 @@ abstract class LastFMScreen : SupportAppScreen(), Parcelable
 /**
  * @property BaseMainScreen - Main screen container.
  * @property MainScreen - All locally stored albums.
- * @property DetailsScreen - A detail-page about album.
  */
 abstract class BaseMainScreen : LastFMScreen()
 abstract class MainScreen : LastFMScreen()
-abstract class DetailsScreen : LastFMScreen()
 
 /**
  * @property BaseSearchScreen - Search screen container.
@@ -21,6 +19,13 @@ abstract class DetailsScreen : LastFMScreen()
  */
 abstract class BaseSearchScreen : LastFMScreen()
 abstract class SearchScreen : LastFMScreen()
+
+/**
+ * @property BaseDetailsScreen - DetailsScreen container.
+ * @property DetailsScreen - A detail-page about album.
+ */
+abstract class BaseDetailsScreen : LastFMScreen()
+abstract class DetailsScreen : LastFMScreen()
 
 /**
  * @property BaseAlbumsScreen - Albums screen container.
