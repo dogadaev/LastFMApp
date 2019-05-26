@@ -1,7 +1,11 @@
 package org.dogadaev.lastfm.search.presentation.view.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -45,6 +49,8 @@ class SearchFragment : BaseFragment(), Search.View {
                 val viewModel = state.viewModel
 
                 searchField.setText(viewModel.searchQuery)
+                searchField.setSelection(viewModel.searchQuery.length)
+
                 adapter.submitList(viewModel.artists) {
                     if (viewModel.newSearch) {
                         recycler.scrollToPosition(0)
@@ -63,14 +69,30 @@ class SearchFragment : BaseFragment(), Search.View {
 
     private fun setupListeners() {
         searchButton.setOnClickListener {
+            hideKeyboard()
+
             presenter.performNewSearch(
                 searchField.text.toString()
             )
+        }
+
+        searchField.setOnEditorActionListener { _, actionId, _ ->
+            hideKeyboard()
+
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                presenter.performNewSearch(
+                    searchField.text.toString()
+                )
+                return@setOnEditorActionListener true
+            }
+            return@setOnEditorActionListener false
         }
     }
 
     private fun setupRecycler() {
         adapter = SearchAdapter()
+
+        adapter.onArtistClicked(presenter::openTopAlbums)
         recycler.layoutManager = LinearLayoutManager(context)
         recycler.adapter = adapter
     }
@@ -81,6 +103,16 @@ class SearchFragment : BaseFragment(), Search.View {
         searchButton.isInvisible = enabled
 
         adapter.onBottomReached(if (enabled) null else presenter::loadNextPage)
+    }
+
+    private fun hideKeyboard() {
+        try {
+            val inputMethodManager =
+                requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.hideSoftInputFromWindow(root.windowToken, 0)
+        } catch (e: Exception) {
+            // no op
+        }
     }
 
     @Parcelize

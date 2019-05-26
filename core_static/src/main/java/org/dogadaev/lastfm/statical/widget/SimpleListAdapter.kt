@@ -10,13 +10,15 @@ import kotlinx.android.extensions.LayoutContainer
 import org.dogadaev.lastfm.statical.widget.SimpleListAdapter.ViewHolder
 import org.koin.core.KoinComponent
 
+private typealias OnBottomReachListener = () -> Unit
+
 abstract class SimpleListAdapter<T>(
     diffCallback: DiffUtil.ItemCallback<T>
 ) : ListAdapter<T, ViewHolder>(diffCallback), KoinComponent {
 
     abstract val layoutRes: Int
-    abstract val bottomReachLimit: Int
-    private var onBottomReachListener: (() -> Unit)? = null
+    protected open val bottomReachLimit: Int = 1
+    private var onBottomReachListener: OnBottomReachListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -31,7 +33,7 @@ abstract class SimpleListAdapter<T>(
 
     abstract fun bind(position: Int, holder: ViewHolder)
 
-    fun onBottomReached(listener: (() -> Unit)?) {
+    fun onBottomReached(listener: OnBottomReachListener?) {
         onBottomReachListener = listener
     }
 

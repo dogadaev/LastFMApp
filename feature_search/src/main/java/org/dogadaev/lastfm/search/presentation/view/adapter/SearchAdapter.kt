@@ -8,6 +8,8 @@ import org.dogadaev.lastfm.statical.media.ImageLoader
 import org.dogadaev.lastfm.statical.widget.SimpleListAdapter
 import org.koin.core.get
 
+private typealias OnArtistClickListener = (artist: String, mbid: String?) -> Unit
+
 class SearchAdapter : SimpleListAdapter<SearchArtist>(SearchDiffCallback) {
     override val layoutRes: Int
         get() = R.layout.item_artist
@@ -16,6 +18,12 @@ class SearchAdapter : SimpleListAdapter<SearchArtist>(SearchDiffCallback) {
         get() = 5
 
     private val imageLoader: ImageLoader = get()
+
+    private var onArtistClickListener: OnArtistClickListener? = null
+
+    fun onArtistClicked(listener: OnArtistClickListener) {
+        onArtistClickListener = listener
+    }
 
     override fun bind(position: Int, holder: ViewHolder) {
         val context = holder.root.context
@@ -33,7 +41,7 @@ class SearchAdapter : SimpleListAdapter<SearchArtist>(SearchDiffCallback) {
         }
 
         holder.root.setOnClickListener {
-            // todo: implement AlbumsScreen open
+            onArtistClickListener?.invoke(artist.name, artist.mbid)
         }
     }
 }

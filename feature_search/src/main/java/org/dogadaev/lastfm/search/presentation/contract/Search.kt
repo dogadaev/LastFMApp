@@ -15,6 +15,7 @@ interface Search {
     abstract class Presenter : BasePresenter<View>() {
         abstract fun performNewSearch(searchQuery: String)
         abstract fun loadNextPage()
+        abstract fun openTopAlbums(artist: String, mbid: String?)
     }
 
     sealed class State {

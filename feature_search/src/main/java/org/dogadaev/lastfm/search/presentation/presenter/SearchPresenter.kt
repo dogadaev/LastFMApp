@@ -4,14 +4,19 @@ import com.arellomobile.mvp.InjectViewState
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import org.dogadaev.lastfm.navigation.BaseAlbumsScreen
 import org.dogadaev.lastfm.net.data.model.search.SearchArtist
 import org.dogadaev.lastfm.search.data.model.SearchViewModel
 import org.dogadaev.lastfm.search.data.repository.SearchRepository
 import org.dogadaev.lastfm.search.presentation.contract.Search
+import org.koin.core.get
+import org.koin.core.parameter.parametersOf
+import ru.terrakok.cicerone.Router
 
 @InjectViewState
 class SearchPresenter(
-    private val searchRepository: SearchRepository
+    private val searchRepository: SearchRepository,
+    private val router: Router
 ) : Search.Presenter() {
 
     private var searchJob: Job? = null
@@ -32,6 +37,13 @@ class SearchPresenter(
         if (currentPage >= maxPages) return
         currentPage++
         loadArtists(false)
+    }
+
+    override fun openTopAlbums(artist: String, mbid: String?) {
+        val albumsScreen = get<BaseAlbumsScreen> {
+            parametersOf(artist, mbid)
+        }
+        router.navigateTo(albumsScreen)
     }
 
     private fun loadArtists(newSearch: Boolean) {
