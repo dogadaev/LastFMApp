@@ -22,6 +22,7 @@ buildscript {
 
         lib_retrofit2_version = '2.6.0-SNAPSHOT'
         lib_okhttp3_version = '3.12.1'
+        lib_stetho_version = '1.5.1'
 
         lib_coroutines_version = '1.2.1'
         lib_gson_version = "2.8.5"

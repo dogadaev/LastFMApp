@@ -1,5 +1,6 @@
 package org.dogadaev.lastfm.net
 
+import com.facebook.stetho.okhttp3.StethoInterceptor
 import okhttp3.OkHttpClient
 import org.dogadaev.lastfm.net.api.API
 import org.koin.core.qualifier.StringQualifier
@@ -18,21 +19,29 @@ val networkModule = module {
     single(HOST_TAG) { "https://ws.audioscrobbler.com/" }
     single(API_KEY) { "7667da5d5a6ed2ad147fcae32017dfde" }
 
+    single { StethoInterceptor() }
+
     single(OKHTTP_TAG) {
-        createOkhttpClient()
+        createApiOkHttpClient(get())
     }
 
     single { createRetrofitClient(get(HOST_TAG), get(OKHTTP_TAG)).create(API::class.java) }
 }
 
-private fun createOkhttpClient(): OkHttpClient =
-    OkHttpClient.Builder()
-        .connectTimeout(CONNECT_TIMEOUT_SEC, TimeUnit.SECONDS)
-        .build()
 
-private fun createRetrofitClient(baseUrl: String, client: OkHttpClient): Retrofit =
-    Retrofit.Builder()
+private fun createApiOkHttpClient(
+    stethoInterceptor: StethoInterceptor
+): OkHttpClient {
+    return OkHttpClient.Builder()
+        .connectTimeout(CONNECT_TIMEOUT_SEC, TimeUnit.SECONDS)
+        .addNetworkInterceptor(stethoInterceptor)
+        .build()
+}
+
+private fun createRetrofitClient(baseUrl: String, client: OkHttpClient): Retrofit {
+    return Retrofit.Builder()
         .baseUrl(baseUrl)
         .addConverterFactory(GsonConverterFactory.create())
         .client(client)
         .build()
+}

@@ -7,12 +7,16 @@ import kotlinx.coroutines.launch
 import org.dogadaev.lastfm.albums.data.model.AlbumsViewModel
 import org.dogadaev.lastfm.albums.data.repository.AlbumsRepository
 import org.dogadaev.lastfm.albums.presentation.contract.Albums
+import org.dogadaev.lastfm.navigation.BaseDetailsScreen
 import org.dogadaev.lastfm.net.data.model.albums.Album
-import java.lang.Exception
+import org.koin.core.get
+import org.koin.core.parameter.parametersOf
+import ru.terrakok.cicerone.Router
 
 @InjectViewState
 class AlbumsPresenter(
-    private val albumsRepository: AlbumsRepository
+    private val albumsRepository: AlbumsRepository,
+    private val router: Router
 ) : Albums.Presenter() {
 
     private var job: Job? = null
@@ -37,6 +41,9 @@ class AlbumsPresenter(
     }
 
     override fun openAlbumInfo(position: Int) {
+        val album = albums[position]
+        val detailsScreen = get<BaseDetailsScreen> { parametersOf(album.artist.name, album.name, mbid) }
+        router.navigateTo(detailsScreen)
     }
 
     private fun getArtistInfo(artist: String, mbid: String?) {

@@ -28,7 +28,6 @@ class SearchPresenter(
 
     override fun performNewSearch(searchQuery: String) {
         this.searchQuery = searchQuery
-        currentPage = 1
         loadArtists(true)
     }
 
@@ -55,7 +54,8 @@ class SearchPresenter(
         searchJob?.cancel()
         searchJob = launch {
             try {
-                val searchModel = searchRepository.searchForArtist(searchQuery, page = currentPage)
+                val page = if (newSearch) 1 else currentPage
+                val searchModel = searchRepository.searchForArtist(searchQuery, page = page)
                 val searchResult = searchModel.results
 
                 this@SearchPresenter.maxPages = searchResult.totalResults / searchResult.itemsPerPage

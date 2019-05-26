@@ -36,11 +36,14 @@ dependencies {
     implementation project(':feature_start')
     implementation project(':feature_search')
     implementation project(':feature_albums')
+    implementation project(':feature_details')
 
     implementation "androidx.appcompat:appcompat:$appcompat_version"
 
     kapt "com.arello-mobile:moxy-compiler:$lib_moxy_version"
     implementation "com.arello-mobile:moxy:$lib_moxy_version"
+
+    implementation "com.facebook.stetho:stetho:$lib_stetho_version"
 
     implementation "org.koin:koin-android:$lib_koin_version"
     implementation "com.android.support:multidex:$app_multidex_version"
