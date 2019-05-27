@@ -13,7 +13,7 @@ interface Details {
     }
 
     abstract class Presenter : BasePresenter<View>() {
-        abstract fun init(artist: String, album: String, mbid: String?)
+        abstract fun init(artist: String, album: String)
     }
 
     sealed class State {

@@ -5,4 +5,5 @@
     <string name="listeners_count">listeners: %1$d</string>
 
     <string name="cd_artist_cover">An artist\'s cover</string>
+    <string name="recycler_placeholder">Empty</string>
 </resources>

@@ -30,7 +30,7 @@ class AlbumsFragment : BaseFragment(), Albums.View {
         val presenter: Albums.Presenter = get()
         val screen = getScreen<Screen>()
 
-        presenter.init(screen.artist, screen.mbid)
+        presenter.init(screen.artist)
         return presenter
     }
 
@@ -80,7 +80,7 @@ class AlbumsFragment : BaseFragment(), Albums.View {
     }
 
     @Parcelize
-    class Screen(val artist: String, val mbid: String?) : AlbumsScreen() {
+    class Screen(val artist: String) : AlbumsScreen() {
         override fun getFragment(): AlbumsFragment = newFragmentWithScreen()
     }
 }

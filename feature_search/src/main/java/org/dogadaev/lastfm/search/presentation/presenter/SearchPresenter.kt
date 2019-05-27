@@ -6,17 +6,21 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import org.dogadaev.lastfm.navigation.BaseAlbumsScreen
 import org.dogadaev.lastfm.net.data.model.search.SearchArtist
+import org.dogadaev.lastfm.search.R
 import org.dogadaev.lastfm.search.data.model.SearchViewModel
 import org.dogadaev.lastfm.search.data.repository.SearchRepository
 import org.dogadaev.lastfm.search.presentation.contract.Search
+import org.dogadaev.lastfm.statical.resources.ResourceProvider
 import org.koin.core.get
 import org.koin.core.parameter.parametersOf
 import ru.terrakok.cicerone.Router
+import java.net.UnknownHostException
 
 @InjectViewState
 class SearchPresenter(
     private val searchRepository: SearchRepository,
-    private val router: Router
+    private val router: Router,
+    private val resourceProvider: ResourceProvider
 ) : Search.Presenter() {
 
     private var searchJob: Job? = null
@@ -27,6 +31,7 @@ class SearchPresenter(
     private var maxPages: Int = 0
 
     override fun performNewSearch(searchQuery: String) {
+        if (searchQuery.isEmpty()) return
         this.searchQuery = searchQuery
         loadArtists(true)
     }
@@ -39,11 +44,9 @@ class SearchPresenter(
 
     override fun openTopAlbums(position: Int) {
         val artist = artists[position].name
-        val mbidRaw = artists[position].mbid
-        val mbid = if (mbidRaw.isNotEmpty()) mbidRaw else null
 
         val albumsScreen = get<BaseAlbumsScreen> {
-            parametersOf(artist, mbid)
+            parametersOf(artist)
         }
         router.navigateTo(albumsScreen)
     }
@@ -63,16 +66,14 @@ class SearchPresenter(
 
                 if (newSearch) artists = mutableListOf()
 
-                updateArtists(searchResult.artistmatches.artists, newSearch)
-            } catch (e: CancellationException) {
-                // no op
-            } catch (e: Exception) {
-                viewState.onState(Search.State.OnError(e.localizedMessage))
+                onDisplay(searchResult.artistmatches.artists, newSearch)
+            } catch (t: Throwable) {
+                processErrors(t)
             }
         }
     }
 
-    private fun updateArtists(newArtists: List<SearchArtist>, newSearch: Boolean) {
+    private fun onDisplay(newArtists: List<SearchArtist>, newSearch: Boolean) {
         val searchViewModel = if (newSearch) {
             artists = newArtists.toMutableList()
 
@@ -93,6 +94,21 @@ class SearchPresenter(
         }
 
         viewState.onState(Search.State.OnDisplay(searchViewModel))
+    }
 
+    private fun processErrors(e: Throwable) {
+        when (e) {
+            is CancellationException -> {
+                // no op
+            }
+            is UnknownHostException ->
+                viewState.onState(Search.State.OnError(resourceProvider.getString(R.string.error_no_internet)))
+            is Exception ->
+                viewState.onState(
+                    Search.State.OnError(
+                        e.localizedMessage ?: resourceProvider.getString(R.string.error_unknown)
+                    )
+                )
+        }
     }
 }

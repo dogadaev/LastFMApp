@@ -35,7 +35,7 @@ class SearchAdapter : SimpleListAdapter<SearchArtist>(SearchDiffCallback) {
         imageLoader.load {
             target(holder.artistCover)
             src(artist.images.getImageUrl())
-            noCaching()
+            noCache()
             fallback(R.drawable.ic_no_image)
             error(R.drawable.ic_no_image)
             placeholder(R.drawable.ic_no_image)

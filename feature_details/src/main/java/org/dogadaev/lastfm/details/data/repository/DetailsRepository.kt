@@ -1,7 +1,7 @@
 package org.dogadaev.lastfm.details.data.repository
 
-import org.dogadaev.lastfm.net.data.model.details.AlbumInfo
+import org.dogadaev.lastfm.details.data.model.AlbumCommon
 
 interface DetailsRepository {
-    suspend fun getAlbumDetails(artist: String, album: String, mbid: String?): AlbumInfo
+    suspend fun getAlbumDetails(artist: String, album: String): AlbumCommon
 }

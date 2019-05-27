@@ -15,7 +15,7 @@ val searchModule = module {
     factory<BaseSearchScreen> { SearchActivity.Screen() }
     factory<SearchScreen> { SearchFragment.Screen() }
 
-    factory<Search.Presenter> { SearchPresenter(get(), get()) }
+    factory<Search.Presenter> { SearchPresenter(get(), get(), get()) }
 
     single<SearchRepository> { SearchRepositoryImpl(get(), get(API_KEY)) }
 }

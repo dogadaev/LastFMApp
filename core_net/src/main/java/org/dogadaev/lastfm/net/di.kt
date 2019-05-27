@@ -3,6 +3,8 @@ package org.dogadaev.lastfm.net
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import okhttp3.OkHttpClient
 import org.dogadaev.lastfm.net.api.API
+import org.dogadaev.lastfm.net.data.repository.NetworkChecker
+import org.dogadaev.lastfm.net.data.repository.NetworkCheckerImpl
 import org.koin.core.qualifier.StringQualifier
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -26,6 +28,8 @@ val networkModule = module {
     }
 
     single { createRetrofitClient(get(HOST_TAG), get(OKHTTP_TAG)).create(API::class.java) }
+
+    single<NetworkChecker> { NetworkCheckerImpl(get()) }
 }
 
 

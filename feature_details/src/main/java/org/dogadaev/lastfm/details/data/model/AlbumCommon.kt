@@ -1,9 +1,9 @@
 package org.dogadaev.lastfm.details.data.model
 
-data class DetailsViewModel(
+
+data class AlbumCommon(
     val name: String,
     val artist: String,
-    val tracks: List<TrackCommon>,
     val imageUrl: String,
-    val isOnline: Boolean
+    val tracks: List<TrackCommon>
 )

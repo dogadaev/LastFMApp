@@ -41,7 +41,7 @@ class AlbumsAdapter : SimpleListAdapter<AlbumCommon>(AlbumsDiffCallback) {
         imageLoader.load {
             target(holder.albumCover)
             src(album.imageUrl)
-            noCaching()
+            noCache()
             fallback(R.drawable.ic_no_image)
             error(R.drawable.ic_no_image)
             placeholder(R.drawable.ic_no_image)

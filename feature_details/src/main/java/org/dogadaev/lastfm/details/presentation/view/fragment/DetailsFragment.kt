@@ -31,7 +31,7 @@ class DetailsFragment : BaseFragment(), Details.View {
         val presenter: Details.Presenter = get()
         val screen = getScreen<Screen>()
 
-        presenter.init(screen.artist, screen.album, screen.mbid)
+        presenter.init(screen.artist, screen.album)
         return presenter
     }
 
@@ -55,7 +55,7 @@ class DetailsFragment : BaseFragment(), Details.View {
                     fallback(R.drawable.ic_no_image)
                     error(R.drawable.ic_no_image)
                     placeholder(R.drawable.ic_no_image)
-                    noCaching()
+                    if (viewModel.isOnline) noCache()
                     placeholder.isVisible = adapter.currentList.isEmpty()
                 }
 
@@ -79,7 +79,7 @@ class DetailsFragment : BaseFragment(), Details.View {
     }
 
     @Parcelize
-    class Screen(val artist: String, val album: String, val mbid: String?) : DetailsScreen() {
+    class Screen(val artist: String, val album: String) : DetailsScreen() {
         override fun getFragment(): DetailsFragment = newFragmentWithScreen()
     }
 }
