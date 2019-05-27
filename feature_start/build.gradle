@@ -1,0 +1,33 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion sdk_compile_version
+
+    defaultConfig {
+        minSdkVersion sdk_min_version
+        targetSdkVersion sdk_target_version
+        versionCode app_version_code
+        versionName "$app_version_name"
+    }
+}
+
+kapt {
+    arguments {
+        arg("moxyReflectorPackage", "org.dogadaev.lastfm.start")
+    }
+}
+
+dependencies {
+    kapt "com.arello-mobile:moxy-compiler:$lib_moxy_version"
+    implementation "com.arello-mobile:moxy:$lib_moxy_version"
+
+    implementation project(':core_static')
+    implementation project(':core_navigation')
+
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+
+    implementation "org.koin:koin-android:$lib_koin_version"
+}

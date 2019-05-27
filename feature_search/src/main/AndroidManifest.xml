@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="org.dogadaev.lastfm.search">
+
+    <application>
+        <activity android:name=".presentation.view.activity.SearchActivity"
+            android:theme="@style/AppTheme.Search"
+            android:label="@string/search_activity_label"/>
+    </application>
+
+</manifest>

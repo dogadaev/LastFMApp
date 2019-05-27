@@ -29,15 +29,27 @@ android {
 }
 
 dependencies {
+    implementation project(':core_net')
+    implementation project(':core_db')
+    implementation project(':core_navigation')
+    implementation project(':core_static')
+    implementation project(':feature_start')
+    implementation project(':feature_search')
+    implementation project(':feature_albums')
+    implementation project(':feature_details')
+    implementation project(':feature_main')
+
     implementation "androidx.appcompat:appcompat:$appcompat_version"
+
+    kapt "com.github.bumptech.glide:compiler:$lib_glide_version"
+    implementation "com.github.bumptech.glide:glide:$lib_glide_version"
+    implementation "com.github.bumptech.glide:okhttp3-integration:$lib_glide_version"
 
     kapt "com.arello-mobile:moxy-compiler:$lib_moxy_version"
     implementation "com.arello-mobile:moxy:$lib_moxy_version"
 
+    implementation "com.facebook.stetho:stetho:$lib_stetho_version"
+
     implementation "org.koin:koin-android:$lib_koin_version"
     implementation "com.android.support:multidex:$app_multidex_version"
-
-    implementation project(':core_net')
-    implementation project(':core_navigation')
-    implementation project(':core_static')
 }

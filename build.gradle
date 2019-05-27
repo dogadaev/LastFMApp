@@ -13,7 +13,7 @@ buildscript {
         app_multidex_version = "1.0.3"
 
         lib_koin_version = '2.0.0-rc-2'
-        lib_moxy_version = '1.5.6'
+        lib_moxy_version = '1.5.3'
         lib_cicerone_version = '5.0.0'
 
         lib_androidx_constraint_layout_version = '1.1.3'
@@ -22,6 +22,7 @@ buildscript {
 
         lib_retrofit2_version = '2.6.0-SNAPSHOT'
         lib_okhttp3_version = '3.12.1'
+        lib_stetho_version = '1.5.1'
 
         lib_coroutines_version = '1.2.1'
         lib_gson_version = "2.8.5"

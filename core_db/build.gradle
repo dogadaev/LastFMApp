@@ -1,0 +1,27 @@
+apply plugin: 'com.android.library'
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion sdk_compile_version
+
+    defaultConfig {
+        minSdkVersion sdk_min_version
+        targetSdkVersion sdk_target_version
+        versionCode app_version_code
+        versionName "$app_version_name"
+    }
+}
+
+dependencies {
+    implementation project(':core_static')
+
+    implementation "org.koin:koin-android:$lib_koin_version"
+
+    implementation "androidx.room:room-runtime:$lib_room_version"
+    implementation "androidx.room:room-ktx:$lib_room_version"
+    kapt "androidx.room:room-compiler:$lib_room_version"
+}
+

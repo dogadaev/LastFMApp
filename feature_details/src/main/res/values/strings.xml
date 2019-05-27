@@ -1,0 +1,7 @@
+<resources>
+    <string name="details_activity_label">Album details</string>
+    <string name="cd_album_cover">An album cover</string>
+    <string name="tracks_placeholder">No tracks found ;(</string>
+    <string name="title_artist">Artist:</string>
+    <string name="title_album">Album:</string>
+</resources>
