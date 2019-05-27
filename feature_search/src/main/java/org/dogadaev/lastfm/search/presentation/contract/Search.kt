@@ -5,7 +5,6 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 import org.dogadaev.lastfm.search.data.model.SearchViewModel
 import org.dogadaev.lastfm.statical.mvp.BasePresenter
 import org.dogadaev.lastfm.statical.mvp.BaseView
-import java.text.FieldPosition
 
 interface Search {
     interface View : BaseView {

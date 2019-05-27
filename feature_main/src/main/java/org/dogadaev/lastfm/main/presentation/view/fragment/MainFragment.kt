@@ -19,6 +19,7 @@ import org.dogadaev.lastfm.main.presentation.view.adapter.MainAdapter
 import org.dogadaev.lastfm.navigation.MainScreen
 import org.dogadaev.lastfm.navigation.newFragmentWithScreen
 import org.dogadaev.lastfm.statical.base.BaseFragment
+import org.dogadaev.lastfm.statical.messages.showInfoMessage
 import org.koin.android.ext.android.get
 
 class MainFragment : BaseFragment(), Main.View {
@@ -59,6 +60,7 @@ class MainFragment : BaseFragment(), Main.View {
             Main.State.OnLoading -> setLoadingEnabled(true)
             is Main.State.OnError -> {
                 setLoadingEnabled(false)
+                showInfoMessage(requireContext(), state.message)
             }
         }
     }
