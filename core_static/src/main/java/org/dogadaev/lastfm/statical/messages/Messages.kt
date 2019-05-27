@@ -1,6 +1,5 @@
 package org.dogadaev.lastfm.statical.messages
 
-import android.app.Activity
 import android.content.Context
 import android.widget.Toast
 
