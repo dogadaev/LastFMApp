@@ -4,6 +4,7 @@ import kotlinx.android.synthetic.main.item_artist.*
 import org.dogadaev.lastfm.net.data.model.getImageUrl
 import org.dogadaev.lastfm.net.data.model.search.SearchArtist
 import org.dogadaev.lastfm.search.R
+import org.dogadaev.lastfm.statical.format.formatBigNumber
 import org.dogadaev.lastfm.statical.media.ImageLoader
 import org.dogadaev.lastfm.statical.widget.SimpleListAdapter
 import org.koin.core.get
@@ -28,9 +29,10 @@ class SearchAdapter : SimpleListAdapter<SearchArtist>(SearchDiffCallback) {
     override fun bind(position: Int, holder: ViewHolder) {
         val context = holder.root.context
         val artist = getItem(position)
+        val listeners = formatBigNumber(artist.listeners)
 
         holder.name.text = artist.name
-        holder.listeners.text = context.getString(R.string.listeners_count, artist.listeners)
+        holder.listeners.text = context.getString(R.string.listeners_count, listeners)
 
         imageLoader.load {
             target(holder.artistCover)

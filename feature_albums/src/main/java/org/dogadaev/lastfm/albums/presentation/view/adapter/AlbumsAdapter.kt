@@ -5,6 +5,7 @@ import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.item_album.*
 import org.dogadaev.lastfm.albums.R
 import org.dogadaev.lastfm.albums.data.model.AlbumCommon
+import org.dogadaev.lastfm.statical.format.formatBigNumber
 import org.dogadaev.lastfm.statical.media.ImageLoader
 import org.dogadaev.lastfm.statical.widget.SimpleListAdapter
 import org.koin.core.get
@@ -34,9 +35,10 @@ class AlbumsAdapter : SimpleListAdapter<AlbumCommon>(AlbumsDiffCallback) {
     override fun bind(position: Int, holder: ViewHolder) {
         val context = holder.root.context
         val album = getItem(position)
+        val playCount = formatBigNumber(album.playCount)
 
         holder.name.text = album.name
-        holder.playCount.text = context.getString(R.string.play_count, album.playCount)
+        holder.playCount.text = context.getString(R.string.play_count, playCount)
 
         imageLoader.load {
             target(holder.albumCover)
