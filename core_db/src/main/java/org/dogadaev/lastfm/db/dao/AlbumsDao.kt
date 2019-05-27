@@ -20,6 +20,6 @@ interface AlbumsDao {
     suspend fun delete(artist: String, album: String)
 
     @Query("SELECT * FROM albums WHERE artist LIKE :artist")
-    fun getAlbums(artist: String): List<AlbumDb>?
+    suspend fun getAlbums(artist: String): List<AlbumDb>?
 
 }

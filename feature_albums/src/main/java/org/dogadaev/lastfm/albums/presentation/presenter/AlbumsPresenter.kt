@@ -48,10 +48,11 @@ class AlbumsPresenter(
     }
 
     override fun saveDeleteAlbum(position: Int) {
+        val album = albums[position]
+
         job?.cancel()
         job = launch {
             try {
-                val album = albums[position]
                 val savedAlbum = if (album.isStored) {
                     albumsRepository.deleteAlbum(album.artist.name, album.name)
                     album.copy(isStored = false, isBeingProcessed = false)
@@ -60,15 +61,14 @@ class AlbumsPresenter(
                     album.copy(isStored = true, isBeingProcessed = false)
                 }
 
-                albums = albums.map { if (it.name == savedAlbum.name) savedAlbum else it }.toMutableList()
-
-                val viewModel = AlbumsViewModel(artist, albums)
-                viewState.onState(Albums.State.OnDisplay(viewModel))
+                updateAlbum(savedAlbum)
             } catch (e: CancellationException) {
                 // no op
             } catch (e: Exception) {
                 viewState.onState(Albums.State.OnError(e.localizedMessage))
-                // todo: остановить прогрессбар
+
+                val albumToReplace = album.copy(isStored = album.isStored, isBeingProcessed = false)
+                updateAlbum(albumToReplace)
             }
         }
     }
@@ -77,10 +77,24 @@ class AlbumsPresenter(
         job?.cancel()
         job = launch {
             try {
+                val savedAlbums = albumsRepository.getSavedAlbums(artist).toMutableList()
+
                 val topAlbumsResult = albumsRepository.getTopAlbums(artist, mbid, page = currentPage)
                 val attributes = topAlbumsResult.topAlbums.attributes
-                val albums = topAlbumsResult.topAlbums.albums.map {
-                    AlbumCommon(it.name, it.playCount, it.url, it.artist, it.images.getImageUrl())
+                val albums = topAlbumsResult.topAlbums.albums.map { netAlbum ->
+                    val isStored =
+                        savedAlbums.removeAll { dbAlbum ->
+                            dbAlbum.name == netAlbum.name && dbAlbum.artist == netAlbum.artist.name
+                        }
+
+                    AlbumCommon(
+                        netAlbum.name,
+                        netAlbum.playCount,
+                        netAlbum.url,
+                        netAlbum.artist,
+                        netAlbum.images.getImageUrl(),
+                        isStored = isStored
+                    )
                 }
 
                 this@AlbumsPresenter.currentPage = attributes.page
@@ -104,7 +118,17 @@ class AlbumsPresenter(
             0
         }
 
+        displayAlbums(addedCount)
+    }
+
+    private fun updateAlbum(savedAlbum: AlbumCommon) {
+        albums = albums.map { if (it.name == savedAlbum.name) savedAlbum else it }.toMutableList()
+        displayAlbums()
+    }
+
+    private fun displayAlbums(addedCount: Int = 0) {
         val viewModel = AlbumsViewModel(artist, albums, addedCount = addedCount)
         viewState.onState(Albums.State.OnDisplay(viewModel))
     }
+
 }
