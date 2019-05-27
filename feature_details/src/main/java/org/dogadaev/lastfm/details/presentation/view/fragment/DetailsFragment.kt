@@ -56,6 +56,7 @@ class DetailsFragment : BaseFragment(), Details.View {
                     error(R.drawable.ic_no_image)
                     placeholder(R.drawable.ic_no_image)
                     noCaching()
+                    placeholder.isVisible = adapter.currentList.isEmpty()
                 }
 
                 albumName.text = viewModel.name

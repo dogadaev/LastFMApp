@@ -8,7 +8,6 @@ import org.dogadaev.lastfm.details.data.model.DetailsViewModel
 import org.dogadaev.lastfm.details.data.repository.DetailsRepository
 import org.dogadaev.lastfm.details.presentation.contract.Details
 import org.dogadaev.lastfm.net.data.model.getImageUrl
-import java.lang.Exception
 
 @InjectViewState
 class DetailsPresenter(

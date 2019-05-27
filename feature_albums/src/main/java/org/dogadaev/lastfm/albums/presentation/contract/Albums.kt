@@ -16,6 +16,7 @@ interface Albums {
         abstract fun init(artist: String, mbid: String?)
         abstract fun loadMoreAlbums()
         abstract fun openAlbumInfo(position: Int)
+        abstract fun saveDeleteAlbum(position: Int)
     }
 
     sealed class State {

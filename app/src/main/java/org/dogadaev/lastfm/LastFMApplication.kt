@@ -1,15 +1,15 @@
 package org.dogadaev.lastfm
 
-import android.webkit.WebView
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.multidex.MultiDexApplication
 import com.arellomobile.mvp.RegisterMoxyReflectorPackages
 import com.facebook.stetho.Stetho
 import org.dogadaev.lastfm.albums.albumsModule
+import org.dogadaev.lastfm.db.databaseModule
 import org.dogadaev.lastfm.details.detailsModule
-import org.dogadaev.lastfm.search.searchModule
 import org.dogadaev.lastfm.navigation.navigationModule
 import org.dogadaev.lastfm.net.networkModule
+import org.dogadaev.lastfm.search.searchModule
 import org.dogadaev.lastfm.start.startModule
 import org.dogadaev.lastfm.statical.gson.gsonModule
 import org.dogadaev.lastfm.statical.media.mediaModule
@@ -40,6 +40,7 @@ class LastFMApplication : MultiDexApplication() {
                 listOf(
                     navigationModule,
                     networkModule,
+                    databaseModule,
                     resourceProviderModule,
                     gsonModule,
                     mediaModule,

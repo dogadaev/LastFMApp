@@ -1,8 +1,8 @@
 package org.dogadaev.lastfm.net.api
 
-import org.dogadaev.lastfm.net.data.model.search.ArtistSearchResult
 import org.dogadaev.lastfm.net.data.model.albums.TopAlbumsResult
 import org.dogadaev.lastfm.net.data.model.details.AlbumInfoResult
+import org.dogadaev.lastfm.net.data.model.search.ArtistSearchResult
 import retrofit2.http.GET
 import retrofit2.http.Query
 

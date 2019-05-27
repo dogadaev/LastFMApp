@@ -30,6 +30,7 @@ android {
 
 dependencies {
     implementation project(':core_net')
+    implementation project(':core_db')
     implementation project(':core_navigation')
     implementation project(':core_static')
     implementation project(':feature_start')

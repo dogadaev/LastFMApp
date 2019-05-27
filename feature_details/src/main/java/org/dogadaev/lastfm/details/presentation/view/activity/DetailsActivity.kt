@@ -7,7 +7,10 @@ import android.view.MenuItem
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.synthetic.main.activity_details.*
 import org.dogadaev.lastfm.details.R
-import org.dogadaev.lastfm.navigation.*
+import org.dogadaev.lastfm.navigation.BaseDetailsScreen
+import org.dogadaev.lastfm.navigation.DetailsScreen
+import org.dogadaev.lastfm.navigation.getScreen
+import org.dogadaev.lastfm.navigation.newIntentWithScreen
 import org.dogadaev.lastfm.statical.base.BaseActivity
 import org.koin.android.ext.android.get
 import org.koin.core.parameter.parametersOf

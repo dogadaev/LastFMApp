@@ -1,7 +1,6 @@
 package org.dogadaev.lastfm.navigation
 
 import android.os.Parcelable
-import ru.terrakok.cicerone.Screen
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 
 abstract class LastFMScreen : SupportAppScreen(), Parcelable

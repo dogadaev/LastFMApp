@@ -68,6 +68,20 @@
             tools:text="Play count: 15 000 000"
             />
 
+        <ProgressBar
+            android:id="@+id/progress"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="8dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/saveDeleteButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/saveDeleteButton"
+            app:layout_constraintTop_toTopOf="@+id/saveDeleteButton"
+            tools:visibility="gone"
+            />
+
         <ImageView
             android:id="@+id/saveDeleteButton"
             android:layout_width="wrap_content"
@@ -77,7 +91,7 @@
             android:padding="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_save"
+            app:srcCompat="@drawable/save_delete_button_selector"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
