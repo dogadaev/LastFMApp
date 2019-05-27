@@ -8,4 +8,14 @@
         <item name="android:actionMenuTextColor">@color/white</item>
         <item name="android:textColorSecondary">@color/white</item>
     </style>
+
+    <style name="ToolbarTheme">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="titleTextColor">@color/white</item>
+    </style>
+
+    <style name="ToolbarTheme.BackButton" >
+        <item name="collapseIcon">@drawable/ic_arrow_back</item>
+        <item name="navigationIcon">@drawable/ic_arrow_back</item>
+    </style>
 </resources>

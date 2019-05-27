@@ -3,10 +3,10 @@ package org.dogadaev.lastfm.search.presentation.view.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.WindowManager
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.synthetic.main.activity_search.*
-import kotlinx.android.synthetic.main.activity_search.view.*
 import org.dogadaev.lastfm.navigation.BaseSearchScreen
 import org.dogadaev.lastfm.navigation.SearchScreen
 import org.dogadaev.lastfm.navigation.newIntentWithScreen
@@ -33,6 +33,17 @@ class SearchActivity : BaseActivity() {
 
     private fun setupToolbar() {
         setSupportActionBar(toolbar)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> onHomePressed()
+        }
+        return true
+    }
+
+    private fun onHomePressed() {
+        router.exit()
     }
 
     @Parcelize

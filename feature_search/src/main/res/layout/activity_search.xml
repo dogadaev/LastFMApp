@@ -19,7 +19,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
-            android:theme="@style/ToolbarTheme"
+            android:theme="@style/ToolbarTheme.BackButton"
             app:titleTextColor="@color/white"
             app:title="@string/search_activity_label"
             />

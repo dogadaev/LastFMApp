@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme.Search"/>
-
-    <style name="ToolbarTheme">
-        <item name="android:background">@color/colorPrimary</item>
-        <item name="titleTextColor">@color/white</item>
-    </style>
+    <style name="AppTheme.Search" />
 
     <style name="EditTextStyle">
         <item name="android:textColorSecondary">@color/grey</item>

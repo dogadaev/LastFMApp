@@ -2,7 +2,7 @@ package org.dogadaev.lastfm.start.presentation.presenter
 
 import android.content.Intent
 import com.arellomobile.mvp.InjectViewState
-import org.dogadaev.lastfm.navigation.BaseSearchScreen
+import org.dogadaev.lastfm.navigation.BaseMainScreen
 import org.dogadaev.lastfm.start.presentation.contract.Start
 import org.koin.core.KoinComponent
 import org.koin.core.get
@@ -15,6 +15,6 @@ class StartPresenter(
 
     override fun handleIntent(intent: Intent?) {
         // todo: test implementation
-        router.newRootScreen(get<BaseSearchScreen>())
+        router.newRootScreen(get<BaseMainScreen>())
     }
 }

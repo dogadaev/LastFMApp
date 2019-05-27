@@ -22,7 +22,6 @@ import org.dogadaev.lastfm.statical.messages.showInfoMessage
 import org.koin.android.ext.android.get
 
 class SearchFragment : BaseFragment(), Search.View {
-
     override val layoutRes: Int
         get() = R.layout.fragment_search
 
@@ -56,6 +55,7 @@ class SearchFragment : BaseFragment(), Search.View {
                     } else {
                         adapter.notifyItemRangeInserted(adapter.currentList.size, viewModel.addedCount)
                     }
+                    placeholder.isVisible = adapter.currentList.isEmpty()
                 }
             }
             is Search.State.OnLoading -> setLoadingEnabled(true)

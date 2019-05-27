@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">LastFMApp</string>
+
+    <string name="error_no_internet">No Internet connection.</string>
+    <string name="error_unknown">Unknown error ;(</string>
+
+    <string name="play_count">Play count: %1$d</string>
 </resources>

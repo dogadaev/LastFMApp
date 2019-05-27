@@ -1,11 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="AppTheme.Albums"/>
-
-    <style name="ToolbarTheme" parent="Widget.MaterialComponents.Toolbar">
-        <item name="collapseIcon">@drawable/ic_arrow_back</item>
-        <item name="navigationIcon">@drawable/ic_arrow_back</item>
-        <item name="android:background">@color/colorPrimary</item>
-        <item name="titleTextColor">@color/white</item>
-    </style>
 </resources>

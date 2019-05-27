@@ -12,14 +12,14 @@ import org.dogadaev.lastfm.net.API_KEY
 import org.koin.dsl.module
 
 val detailsModule = module {
-    factory<Details.Presenter> { DetailsPresenter(get()) }
+    factory<Details.Presenter> { DetailsPresenter(get(), get(), get()) }
 
-    factory<BaseDetailsScreen> { (artist: String, album: String, mbid: String?) ->
-        DetailsActivity.Screen(artist, album, mbid)
+    factory<BaseDetailsScreen> { (artist: String, album: String) ->
+        DetailsActivity.Screen(artist, album)
     }
-    factory<DetailsScreen> { (artist: String, album: String, mbid: String?) ->
-        DetailsFragment.Screen(artist, album, mbid)
+    factory<DetailsScreen> { (artist: String, album: String) ->
+        DetailsFragment.Screen(artist, album)
     }
 
-    single<DetailsRepository> { DetailsRepositoryImpl(get(), get(API_KEY)) }
+    single<DetailsRepository> { DetailsRepositoryImpl(get(), get(API_KEY), get(), get()) }
 }

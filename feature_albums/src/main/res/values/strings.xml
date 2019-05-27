@@ -2,7 +2,6 @@
     <string name="albums_activity_label">Albums</string>
 
     <string name="cd_album_cover">An album cover</string>
-    <string name="play_count">Play count: %1$d</string>
     <string name="cd_add_delete_button">Add/Delete button</string>
     <string name="albums_placeholder">No albums found ;(</string>
 

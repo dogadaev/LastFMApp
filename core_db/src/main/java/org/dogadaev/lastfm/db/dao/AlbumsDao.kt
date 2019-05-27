@@ -22,4 +22,10 @@ interface AlbumsDao {
     @Query("SELECT * FROM albums WHERE artist LIKE :artist")
     suspend fun getAlbums(artist: String): List<AlbumDb>?
 
+    @Query("SELECT * FROM albums")
+    suspend fun getAllAlbums(): List<AlbumDb>?
+
+    @Query("SELECT * FROM albums WHERE artist LIKE :artist AND name LIKE :album")
+    suspend fun getAlbum(artist: String, album: String): AlbumDb?
+
 }

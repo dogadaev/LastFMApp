@@ -31,7 +31,7 @@ class DetailsActivity : BaseActivity() {
         if (savedInstanceState == null) {
             router.newRootScreen(get<DetailsScreen> {
                 val screen = getScreen<Screen>()
-                parametersOf(screen.artist, screen.album, screen.mbid)
+                parametersOf(screen.artist, screen.album)
             })
         }
     }
@@ -53,7 +53,7 @@ class DetailsActivity : BaseActivity() {
     }
 
     @Parcelize
-    class Screen(val artist: String, val album: String, val mbid: String?) : BaseDetailsScreen() {
+    class Screen(val artist: String, val album: String) : BaseDetailsScreen() {
         override fun getActivityIntent(context: Context): Intent =
             newIntentWithScreen<DetailsActivity, Screen>(context)
     }

@@ -7,6 +7,7 @@ import com.facebook.stetho.Stetho
 import org.dogadaev.lastfm.albums.albumsModule
 import org.dogadaev.lastfm.db.databaseModule
 import org.dogadaev.lastfm.details.detailsModule
+import org.dogadaev.lastfm.main.mainModule
 import org.dogadaev.lastfm.navigation.navigationModule
 import org.dogadaev.lastfm.net.networkModule
 import org.dogadaev.lastfm.search.searchModule
@@ -22,7 +23,8 @@ import org.koin.core.context.startKoin
     "org.dogadaev.lastfm.start",
     "org.dogadaev.lastfm.search",
     "org.dogadaev.lastfm.albums",
-    "org.dogadaev.lastfm.details"
+    "org.dogadaev.lastfm.details",
+    "org.dogadaev.lastfm.main"
 )
 class LastFMApplication : MultiDexApplication() {
 
@@ -47,7 +49,8 @@ class LastFMApplication : MultiDexApplication() {
                     startModule,
                     searchModule,
                     albumsModule,
-                    detailsModule
+                    detailsModule,
+                    mainModule
                 )
             )
         }
