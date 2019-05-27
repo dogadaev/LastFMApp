@@ -37,6 +37,7 @@ dependencies {
     implementation project(':feature_search')
     implementation project(':feature_albums')
     implementation project(':feature_details')
+    implementation project(':feature_main')
 
     implementation "androidx.appcompat:appcompat:$appcompat_version"
 

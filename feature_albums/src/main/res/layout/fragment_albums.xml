@@ -56,10 +56,14 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:text="@string/albums_placeholder"
+        android:textColor="@color/placeholder_color"
+        android:textSize="16sp"
+        android:textStyle="bold"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/recycler"
         app:layout_constraintEnd_toEndOf="@+id/recycler"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/recycler"
+        tools:visibility="visible"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

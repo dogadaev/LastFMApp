@@ -52,7 +52,6 @@ class AlbumsPresenter(
     override fun saveDeleteAlbum(position: Int) {
         val album = albums[position]
 
-        job?.cancel()
         job = launch {
             try {
                 val savedAlbum = if (album.isStored) {

@@ -32,7 +32,8 @@ class AlbumsRepositoryImpl(
             album.name,
             album.artist.name,
             album.imageUrl,
-            tracks
+            tracks,
+            album.playCount
         )
 
         albumsDao.insert(albumDb)

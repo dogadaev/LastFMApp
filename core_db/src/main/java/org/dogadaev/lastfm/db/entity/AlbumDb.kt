@@ -9,5 +9,6 @@ data class AlbumDb(
     val name: String,
     val artist: String,
     val imageUrl: String,
-    val tracksDb: List<TrackDb>
+    val tracksDb: List<TrackDb>,
+    val playCount: Int
 )
