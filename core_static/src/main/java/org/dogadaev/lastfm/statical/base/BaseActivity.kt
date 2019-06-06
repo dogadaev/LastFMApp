@@ -1,11 +1,11 @@
 package org.dogadaev.lastfm.statical.base
 
 import androidx.annotation.IdRes
-import org.dogadaev.lastfm.statical.androidx.moxy.MvpAppCompatActivity
+import moxy.MvpAppCompatActivity
 import org.dogadaev.lastfm.statical.mvp.BaseView
+import org.koin.android.ext.android.get
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
-import org.koin.android.ext.android.get
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 
 abstract class BaseActivity : MvpAppCompatActivity(), BaseView {

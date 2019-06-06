@@ -1,7 +1,5 @@
 package org.dogadaev.lastfm.search.presentation.contract
 
-import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy
-import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 import org.dogadaev.lastfm.search.data.model.SearchViewModel
 import org.dogadaev.lastfm.statical.mvp.BasePresenter
 import org.dogadaev.lastfm.statical.mvp.BaseView

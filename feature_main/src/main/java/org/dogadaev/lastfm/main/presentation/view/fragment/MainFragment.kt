@@ -9,10 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.ProvidePresenter
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.synthetic.main.fragment_main.*
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 import org.dogadaev.lastfm.main.R
 import org.dogadaev.lastfm.main.presentation.contract.Main
 import org.dogadaev.lastfm.main.presentation.view.adapter.MainAdapter

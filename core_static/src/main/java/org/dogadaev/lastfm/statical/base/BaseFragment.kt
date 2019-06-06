@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
-import org.dogadaev.lastfm.statical.androidx.moxy.MvpAppCompatFragment
+import moxy.MvpAppCompatFragment
 import org.dogadaev.lastfm.statical.mvp.BaseView
 
 abstract class BaseFragment : MvpAppCompatFragment(), BaseView {

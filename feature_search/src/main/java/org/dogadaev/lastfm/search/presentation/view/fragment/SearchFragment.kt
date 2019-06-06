@@ -8,10 +8,10 @@ import android.view.inputmethod.InputMethodManager
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.ProvidePresenter
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.synthetic.main.fragment_search.*
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 import org.dogadaev.lastfm.navigation.SearchScreen
 import org.dogadaev.lastfm.navigation.newFragmentWithScreen
 import org.dogadaev.lastfm.search.R

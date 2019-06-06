@@ -1,5 +1,5 @@
 package org.dogadaev.lastfm.statical.mvp
 
-import com.arellomobile.mvp.MvpView
+import moxy.MvpView
 
 interface BaseView : MvpView

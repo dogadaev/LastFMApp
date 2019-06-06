@@ -21,8 +21,8 @@ kapt {
 }
 
 dependencies {
-    kapt "com.arello-mobile:moxy-compiler:$lib_moxy_version"
-    implementation "com.arello-mobile:moxy:$lib_moxy_version"
+    kapt "com.github.moxy-community:moxy-compiler:$lib_moxy_version"
+    implementation "com.github.moxy-community:moxy:$lib_moxy_version"
 
     implementation project(':core_static')
     implementation project(':core_navigation')
