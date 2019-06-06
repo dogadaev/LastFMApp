@@ -1,9 +1,9 @@
 package org.dogadaev.lastfm.albums.presentation.presenter
 
-import com.arellomobile.mvp.InjectViewState
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import moxy.InjectViewState
 import org.dogadaev.lastfm.albums.R
 import org.dogadaev.lastfm.albums.data.model.AlbumCommon
 import org.dogadaev.lastfm.albums.data.model.AlbumsViewModel

@@ -1,7 +1,7 @@
 package org.dogadaev.lastfm.main.presentation.contract
 
-import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy
-import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
+import moxy.viewstate.strategy.AddToEndSingleStrategy
+import moxy.viewstate.strategy.StateStrategyType
 import org.dogadaev.lastfm.main.data.model.MainViewModel
 import org.dogadaev.lastfm.statical.mvp.BasePresenter
 import org.dogadaev.lastfm.statical.mvp.BaseView

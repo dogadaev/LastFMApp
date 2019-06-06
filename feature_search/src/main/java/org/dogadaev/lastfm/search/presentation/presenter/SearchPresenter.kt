@@ -1,9 +1,9 @@
 package org.dogadaev.lastfm.search.presentation.presenter
 
-import com.arellomobile.mvp.InjectViewState
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import moxy.InjectViewState
 import org.dogadaev.lastfm.navigation.BaseAlbumsScreen
 import org.dogadaev.lastfm.net.data.model.search.SearchArtist
 import org.dogadaev.lastfm.search.R

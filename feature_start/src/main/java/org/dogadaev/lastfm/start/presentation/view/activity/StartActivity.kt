@@ -1,8 +1,8 @@
 package org.dogadaev.lastfm.start.presentation.view.activity
 
 import android.os.Bundle
-import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.ProvidePresenter
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 import org.dogadaev.lastfm.start.presentation.contract.Start
 import org.dogadaev.lastfm.statical.base.BaseActivity
 import org.koin.android.ext.android.get

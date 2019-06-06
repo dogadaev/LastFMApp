@@ -1,8 +1,8 @@
 package org.dogadaev.lastfm.start.presentation.contract
 
 import android.content.Intent
-import com.arellomobile.mvp.MvpPresenter
-import com.arellomobile.mvp.MvpView
+import moxy.MvpPresenter
+import moxy.MvpView
 
 interface Start {
     interface View : MvpView

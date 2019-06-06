@@ -1,7 +1,7 @@
 package org.dogadaev.lastfm.main.presentation.presenter
 
-import com.arellomobile.mvp.InjectViewState
 import kotlinx.coroutines.launch
+import moxy.InjectViewState
 import org.dogadaev.lastfm.db.entity.AlbumDb
 import org.dogadaev.lastfm.main.R
 import org.dogadaev.lastfm.main.data.model.MainViewModel

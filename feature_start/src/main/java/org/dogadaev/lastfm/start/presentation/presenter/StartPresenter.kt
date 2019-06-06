@@ -1,7 +1,7 @@
 package org.dogadaev.lastfm.start.presentation.presenter
 
 import android.content.Intent
-import com.arellomobile.mvp.InjectViewState
+import moxy.InjectViewState
 import org.dogadaev.lastfm.navigation.BaseMainScreen
 import org.dogadaev.lastfm.start.presentation.contract.Start
 import org.koin.core.KoinComponent

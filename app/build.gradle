@@ -45,8 +45,8 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$lib_glide_version"
     implementation "com.github.bumptech.glide:okhttp3-integration:$lib_glide_version"
 
-    kapt "com.arello-mobile:moxy-compiler:$lib_moxy_version"
-    implementation "com.arello-mobile:moxy:$lib_moxy_version"
+    kapt "com.github.moxy-community:moxy-compiler:$lib_moxy_version"
+    implementation "com.github.moxy-community:moxy:$lib_moxy_version"
 
     implementation "com.facebook.stetho:stetho:$lib_stetho_version"
 

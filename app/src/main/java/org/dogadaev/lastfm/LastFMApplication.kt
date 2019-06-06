@@ -2,8 +2,8 @@ package org.dogadaev.lastfm
 
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.multidex.MultiDexApplication
-import com.arellomobile.mvp.RegisterMoxyReflectorPackages
 import com.facebook.stetho.Stetho
+import moxy.RegisterMoxyReflectorPackages
 import org.dogadaev.lastfm.albums.albumsModule
 import org.dogadaev.lastfm.db.databaseModule
 import org.dogadaev.lastfm.details.detailsModule

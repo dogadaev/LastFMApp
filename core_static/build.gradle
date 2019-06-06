@@ -14,8 +14,8 @@ android {
 }
 
 dependencies {
-    implementation "com.arello-mobile:moxy:$lib_moxy_version"
-    implementation "com.arello-mobile:moxy-app-compat:$lib_moxy_version"
+    implementation "com.github.moxy-community:moxy:$lib_moxy_version"
+    implementation "com.github.moxy-community:moxy-androidx:$lib_moxy_version"
 
     implementation "androidx.core:core-ktx:$lib_androidx_ktx"
     implementation "androidx.appcompat:appcompat:$appcompat_version"

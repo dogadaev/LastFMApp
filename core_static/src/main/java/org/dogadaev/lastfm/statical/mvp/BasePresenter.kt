@@ -1,11 +1,11 @@
 package org.dogadaev.lastfm.statical.mvp
 
 import androidx.annotation.CallSuper
-import com.arellomobile.mvp.MvpPresenter
 import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import moxy.MvpPresenter
 import org.koin.core.KoinComponent
 import kotlin.coroutines.CoroutineContext
 

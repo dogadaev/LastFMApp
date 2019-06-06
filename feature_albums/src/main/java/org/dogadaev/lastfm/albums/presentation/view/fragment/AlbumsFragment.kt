@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.ProvidePresenter
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.synthetic.main.fragment_albums.*
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 import org.dogadaev.lastfm.albums.R
 import org.dogadaev.lastfm.albums.presentation.contract.Albums
 import org.dogadaev.lastfm.albums.presentation.view.adapter.AlbumsAdapter

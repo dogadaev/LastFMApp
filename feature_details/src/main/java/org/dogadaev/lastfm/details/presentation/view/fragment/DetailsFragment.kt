@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.ProvidePresenter
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.synthetic.main.fragment_details.*
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 import org.dogadaev.lastfm.details.R
 import org.dogadaev.lastfm.details.presentation.contract.Details
 import org.dogadaev.lastfm.details.presentation.view.adapter.DetailsAdapter
