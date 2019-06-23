@@ -12,7 +12,9 @@ android {
         versionCode app_version_code
         versionName "$app_version_name"
 
+        multiDexEnabled true
         android.defaultConfig.vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     kapt {
@@ -37,6 +39,16 @@ dependencies {
     implementation "com.google.android.material:material:$lib_material_version"
 
     implementation "org.koin:koin-androidx-scope:$lib_koin_version"
+
+    testImplementation "junit:junit:$test_jUnit_version"
+    testImplementation "org.koin:koin-test:$test_koin_version"
+    testImplementation "io.mockk:mockk:$test_mockk"
+
+    androidTestImplementation "androidx.test:runner:$test_runner_version"
+    androidTestImplementation "androidx.test:rules:$test_runner_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$test_espresso_version"
+    androidTestImplementation "androidx.test.ext:junit:$test_jUnit_ext_version"
+
 }
 
 androidExtensions {

@@ -12,7 +12,7 @@ android {
         versionCode app_version_code
         versionName "$app_version_name"
 
-        multiDexEnabled = true
+        multiDexEnabled true
 
         android.defaultConfig.vectorDrawables.useSupportLibrary = true
     }

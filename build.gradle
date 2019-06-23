@@ -12,6 +12,15 @@ buildscript {
         app_version_name = "0.1"
         app_multidex_version = "1.0.3"
 
+        test_runner_version = '1.1.1'
+        test_espresso_version = '3.1.1'
+        test_jUnit_version = '4.12'
+        test_jUnit_ext_version = "1.1.1"
+        test_koin_version = '2.0.1'
+        test_mockk = '1.9.3.kotlin12'
+        test_core_version = '1.2.0'
+        test_fragment_version = '1.1.0-beta01'
+
         lib_koin_version = '2.0.0-rc-2'
         lib_moxy_version = '1.5.3'
         lib_cicerone_version = '5.0.0'
