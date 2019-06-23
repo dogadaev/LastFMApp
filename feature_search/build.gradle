@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
+    defaultPublishConfig "unitTestDebug"
     compileSdkVersion sdk_compile_version
 
     defaultConfig {
@@ -15,9 +16,32 @@ android {
         android.defaultConfig.vectorDrawables.useSupportLibrary = true
     }
 
-    kapt {
-        arguments {
-            arg("moxyReflectorPackage", "org.dogadaev.lastfm.search")
+    flavorDimensions("default")
+    productFlavors {
+        unitTest {
+            dimension "default"
+            kapt {
+                arguments {
+                    arg("moxyReflectorPackage", "")
+                }
+            }
+        }
+
+        dev {
+            dimension "default"
+
+            kapt {
+                arguments {
+//                    arg("moxyReflectorPackage", "org.dogadaev.lastfm.search")
+                    arg("moxyReflectorPackage", "")
+                }
+            }
+        }
+    }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
         }
     }
 }
@@ -37,6 +61,14 @@ dependencies {
     implementation "com.google.android.material:material:$lib_material_version"
 
     implementation "org.koin:koin-androidx-scope:$lib_koin_version"
+
+    testImplementation "org.koin:koin-test:$test_koin"
+    testImplementation "junit:junit:$test_jUnit_version"
+    testImplementation "io.mockk:mockk:$test_mockk"
+    testImplementation 'org.robolectric:robolectric:4.3'
+
+    androidTestImplementation "androidx.test:runner:$test_runner_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$test_espresso_version"
 }
 
 androidExtensions {
