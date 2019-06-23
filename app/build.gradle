@@ -17,13 +17,21 @@ android {
         android.defaultConfig.vectorDrawables.useSupportLibrary = true
     }
 
+    flavorDimensions("default")
+    productFlavors {
+        unitTest {
+            dimension "default"
+        }
+
+        dev {
+            dimension "default"
+
+        }
+    }
+
     buildTypes {
         debug {
             minifyEnabled false
-        }
-        release {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 }

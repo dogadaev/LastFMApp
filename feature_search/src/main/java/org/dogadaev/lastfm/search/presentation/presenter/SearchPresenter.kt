@@ -61,7 +61,8 @@ class SearchPresenter(
                 val searchModel = searchRepository.searchForArtist(searchQuery, page = page)
                 val searchResult = searchModel.results
 
-                this@SearchPresenter.maxPages = searchResult.totalResults / searchResult.itemsPerPage
+                if (searchResult.itemsPerPage != 0)
+                    this@SearchPresenter.maxPages = searchResult.totalResults / searchResult.itemsPerPage
                 this@SearchPresenter.currentPage = searchResult.query.startPage
 
                 if (newSearch) artists = mutableListOf()
