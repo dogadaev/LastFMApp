@@ -7,6 +7,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import org.dogadaev.lastfm.search.R
 import org.dogadaev.lastfm.search.presentation.view.activity.SearchActivity
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -18,11 +19,14 @@ class SearchFragmentTest {
     @JvmField
     val activityRule = ActivityTestRule<SearchActivity>(SearchActivity::class.java)
 
-    @Test
-    fun user_can_enter_search_query() {
+    @Before
+    fun setup() {
         val fragment = SearchFragment.Screen().fragment
         activityRule.activity.supportFragmentManager.beginTransaction().add(R.id.fragmentContainer, fragment).commit()
+    }
 
+    @Test
+    fun user_can_enter_search_query() {
         onView(withId(R.id.searchField)).perform(typeText("Macklemore"))
     }
 }
