@@ -17,12 +17,15 @@ class SearchFragmentTest {
 
     @Rule
     @JvmField
-    val activityRule = ActivityTestRule<SearchActivity>(SearchActivity::class.java)
+    val activityRule = ActivityTestRule(SearchActivity::class.java, true, false)
 
     @Before
     fun setup() {
-        val fragment = SearchFragment.Screen().fragment
-        activityRule.activity.supportFragmentManager.beginTransaction().add(R.id.fragmentContainer, fragment).commit()
+
+        activityRule.launchActivity(null)
+
+//        val fragment = SearchFragment.Screen().fragment
+//        activityRule.activity.supportFragmentManager.beginTransaction().add(R.id.fragmentContainer, fragment).commit()
     }
 
     @Test

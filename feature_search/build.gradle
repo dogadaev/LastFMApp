@@ -14,7 +14,7 @@ android {
 
         multiDexEnabled true
         android.defaultConfig.vectorDrawables.useSupportLibrary = true
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "org.dogadaev.lastfm.app.TestAppJUnitRunner"
     }
 
     kapt {
@@ -44,6 +44,8 @@ dependencies {
     testImplementation "org.koin:koin-test:$test_koin_version"
     testImplementation "io.mockk:mockk:$test_mockk"
 
+    androidTestImplementation ("io.mockk:mockk-android:$test_mockk") { exclude module: 'objenesis' }
+    androidTestImplementation 'org.objenesis:objenesis:2.6'
     androidTestImplementation "androidx.test:runner:$test_runner_version"
     androidTestImplementation "androidx.test:rules:$test_runner_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$test_espresso_version"
