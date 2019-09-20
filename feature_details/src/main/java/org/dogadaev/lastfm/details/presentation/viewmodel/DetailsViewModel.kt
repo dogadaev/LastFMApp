@@ -1,35 +1,34 @@
-package org.dogadaev.lastfm.details.presentation.presenter
+package org.dogadaev.lastfm.details.presentation.viewmodel
 
-import com.arellomobile.mvp.InjectViewState
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import org.dogadaev.lastfm.details.R
-import org.dogadaev.lastfm.details.data.model.DetailsViewModel
+import org.dogadaev.lastfm.details.data.model.DetailsModel
 import org.dogadaev.lastfm.details.data.repository.DetailsRepository
 import org.dogadaev.lastfm.details.presentation.contract.Details
 import org.dogadaev.lastfm.net.data.repository.NetworkChecker
 import org.dogadaev.lastfm.statical.resources.ResourceProvider
 import java.net.UnknownHostException
 
-@InjectViewState
-class DetailsPresenter(
+class DetailsViewModel(
+    artist: String,
+    album: String,
     private val detailsRepository: DetailsRepository,
-    private val networkChecker: NetworkChecker,
-    private val resourceProvider: ResourceProvider
-) : Details.Presenter() {
+    private val resourceProvider: ResourceProvider,
+    private val networkChecker: NetworkChecker
+) : Details.ViewModel() {
+    override val albumLiveData = MutableLiveData<Details.State>()
 
-    private var job: Job? = null
+    init {
+        onState(Details.State.OnLoading)
 
-    override fun init(artist: String, album: String) {
-        viewState.onState(Details.State.OnLoading)
-
-        job?.cancel()
-        job = launch {
+        viewModelScope.launch {
             try {
                 val albumInfo = detailsRepository.getAlbumDetails(artist, album)
 
-                val viewModel = DetailsViewModel(
+                val viewModel = DetailsModel(
                     albumInfo.name,
                     albumInfo.artist,
                     albumInfo.tracks,
@@ -37,22 +36,26 @@ class DetailsPresenter(
                     networkChecker.isNetworkConnected
                 )
 
-                viewState.onState(Details.State.OnDisplay(viewModel))
-            } catch (t: Throwable) {
-                processErrors(t)
+                onState(Details.State.OnDisplay(viewModel))
+            } catch (e: Exception) {
+                processErrors(e)
             }
         }
     }
 
-    private fun processErrors(e: Throwable) {
+    private fun onState(state: Details.State) {
+        albumLiveData.value = state
+    }
+
+    private fun processErrors(e: Exception) {
         when (e) {
             is CancellationException -> {
                 // no op
             }
             is UnknownHostException ->
-                viewState.onState(Details.State.OnError(resourceProvider.getString(R.string.error_no_internet)))
-            is Exception ->
-                viewState.onState(
+                onState(Details.State.OnError(resourceProvider.getString(R.string.error_no_internet)))
+            else  ->
+                onState(
                     Details.State.OnError(
                         e.localizedMessage ?: resourceProvider.getString(R.string.error_unknown)
                     )

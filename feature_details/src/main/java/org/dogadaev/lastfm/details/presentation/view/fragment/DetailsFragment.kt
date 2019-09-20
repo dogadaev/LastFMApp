@@ -3,9 +3,8 @@ package org.dogadaev.lastfm.details.presentation.view.fragment
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.ProvidePresenter
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.synthetic.main.fragment_details.*
 import org.dogadaev.lastfm.details.R
@@ -18,32 +17,26 @@ import org.dogadaev.lastfm.statical.base.BaseFragment
 import org.dogadaev.lastfm.statical.media.ImageLoader
 import org.dogadaev.lastfm.statical.messages.showInfoMessage
 import org.koin.android.ext.android.get
+import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class DetailsFragment : BaseFragment(), Details.View {
     override val layoutRes: Int
         get() = R.layout.fragment_details
 
-    @InjectPresenter
-    internal lateinit var presenter: Details.Presenter
-
-    @ProvidePresenter
-    fun provide(): Details.Presenter {
-        val presenter: Details.Presenter = get()
+    private val viewModel: Details.ViewModel by viewModel {
         val screen = getScreen<Screen>()
 
-        presenter.init(screen.artist, screen.album)
-        return presenter
+        parametersOf(
+            screen.artist,
+            screen.album
+        )
     }
 
     private val imageLoader: ImageLoader = get()
     private lateinit var adapter: DetailsAdapter
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setupRecycler()
-    }
-
-    override fun onState(state: Details.State) {
+    private val albumObserver = Observer<Details.State> { state ->
         when (state) {
             is Details.State.OnDisplay -> {
                 val viewModel = state.viewModel
@@ -70,6 +63,20 @@ class DetailsFragment : BaseFragment(), Details.View {
                 showInfoMessage(requireContext(), state.message)
             }
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        initViewModel()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupRecycler()
+    }
+
+    private fun initViewModel() {
+        viewModel.albumLiveData.observe(this, albumObserver)
     }
 
     private fun setupRecycler() {

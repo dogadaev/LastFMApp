@@ -3,7 +3,7 @@ package org.dogadaev.lastfm.main.presentation.contract
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 import org.dogadaev.lastfm.main.data.model.MainViewModel
-import org.dogadaev.lastfm.statical.mvp.BasePresenter
+import org.dogadaev.lastfm.statical.mvp.BasePresenter_LEGACY
 import org.dogadaev.lastfm.statical.mvp.BaseView
 
 interface Main {
@@ -12,7 +12,7 @@ interface Main {
         fun onState(state: State)
     }
 
-    abstract class Presenter : BasePresenter<View>() {
+    abstract class Presenter : BasePresenter_LEGACY<View>() {
         abstract fun refresh()
         abstract fun openSearch()
         abstract fun openDetails(position: Int)

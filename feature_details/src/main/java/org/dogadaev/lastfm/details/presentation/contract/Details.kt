@@ -1,23 +1,18 @@
 package org.dogadaev.lastfm.details.presentation.contract
 
-import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy
-import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
-import org.dogadaev.lastfm.details.data.model.DetailsViewModel
-import org.dogadaev.lastfm.statical.mvp.BasePresenter
-import org.dogadaev.lastfm.statical.mvp.BaseView
+import androidx.lifecycle.LiveData
+import org.dogadaev.lastfm.details.data.model.DetailsModel
+import org.dogadaev.lastfm.statical.mvp.BaseViewModel
 
 interface Details {
-    interface View : BaseView {
-        @StateStrategyType(AddToEndSingleStrategy::class)
-        fun onState(state: State)
-    }
+    interface View
 
-    abstract class Presenter : BasePresenter<View>() {
-        abstract fun init(artist: String, album: String)
+    abstract class ViewModel : BaseViewModel() {
+        abstract val albumLiveData: LiveData<State>
     }
 
     sealed class State {
-        class OnDisplay(val viewModel: DetailsViewModel) : State()
+        class OnDisplay(val viewModel: DetailsModel) : State()
         object OnLoading : State()
         class OnError(val message: String) : State()
     }

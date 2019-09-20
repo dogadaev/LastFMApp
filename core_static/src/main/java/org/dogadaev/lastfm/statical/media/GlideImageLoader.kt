@@ -32,7 +32,6 @@ class GlideImageLoader(
             .into(build.target)
     }
 
-
     private fun loadImage(imageUrl: String?): Boolean {
         if (imageUrl == null || imageUrl.isEmpty()) return false
 
