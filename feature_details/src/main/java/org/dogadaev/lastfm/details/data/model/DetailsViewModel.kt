@@ -1,6 +1,6 @@
 package org.dogadaev.lastfm.details.data.model
 
-data class DetailsViewModel(
+data class DetailsModel(
     val name: String,
     val artist: String,
     val tracks: List<TrackCommon>,

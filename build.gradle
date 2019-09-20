@@ -19,6 +19,8 @@ buildscript {
         lib_androidx_constraint_layout_version = '1.1.3'
         lib_androidx_recycler = '1.1.0-alpha06'
         lib_androidx_ktx = '1.0.2'
+        lib_androidx_lifecycle_version = '2.2.0-alpha01'
+        lib_androidx_livedata_version = '1.1.1'
 
         lib_retrofit2_version = '2.6.0-SNAPSHOT'
         lib_okhttp3_version = '3.12.1'

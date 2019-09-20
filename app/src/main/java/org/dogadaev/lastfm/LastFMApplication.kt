@@ -23,7 +23,6 @@ import org.koin.core.context.startKoin
     "org.dogadaev.lastfm.start",
     "org.dogadaev.lastfm.search",
     "org.dogadaev.lastfm.albums",
-    "org.dogadaev.lastfm.details",
     "org.dogadaev.lastfm.main"
 )
 class LastFMApplication : MultiDexApplication() {

@@ -14,17 +14,9 @@ android {
 
         android.defaultConfig.vectorDrawables.useSupportLibrary = true
     }
-
-    kapt {
-        arguments {
-            arg("moxyReflectorPackage", "org.dogadaev.lastfm.details")
-        }
-    }
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     kapt "com.arello-mobile:moxy-compiler:$lib_moxy_version"
     implementation "com.arello-mobile:moxy:$lib_moxy_version"
 
@@ -38,8 +30,11 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$lib_androidx_constraint_layout_version"
     implementation "androidx.recyclerview:recyclerview:$lib_androidx_recycler"
     implementation "com.google.android.material:material:$lib_material_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lib_androidx_lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata:$lib_androidx_lifecycle_version"
 
     implementation "org.koin:koin-androidx-scope:$lib_koin_version"
+    implementation "org.koin:koin-android-viewmodel:$lib_koin_version"
 }
 
 androidExtensions {
